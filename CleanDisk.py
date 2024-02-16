@@ -53,6 +53,7 @@ root = tk.Tk()
 root.title("KNX")
 root.resizable(False, False)
 root.option_add("*Font", "Calibri")
+root.iconbitmap("Style/logo.ico")
 # TOP Text
 label = tk.Label(root, text="KNX Cleaner & Updater", font=("Calibri", 13))
 label.pack()
