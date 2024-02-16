@@ -10,13 +10,13 @@ import psutil
 import tkinter as tk
 from tkinter import messagebox
 from functools import partial
-
+from functions import open_prefetch
+from functions import run_disk_cleanup
 
 class DiskCleaner:
     def __init__(self):
         self.running = False
         self.stop_event = threading.Event()
-        self.Prefetch_path = r'C:\Windows\Prefetch'
         self.Temp_path = r'AssetsScripts\SPEEDUP.BAT'
         self.Learix_path = r'AssetsScripts\Learix FPS.bat'
         self.Adobe_path = r'AssetsScripts\Adobe Creative Cloud.lnk'
@@ -32,22 +32,11 @@ class DiskCleaner:
 
     # Prefetch folder
     def open_prefetch_folder(self):
-        try:
-            os.startfile(self.Prefetch_path)
-            print("Opened Prefetch Folder")
-        except Exception as e:
-            print("Error opening Prefetch Folder:", str(e))
+        open_prefetch.open_prefetch_folder()
 
     # Čistenie disku
     def run_disk_cleanup_tool(self):
-        try:
-            subprocess.Popen('cleanmgr.exe')
-            time.sleep(1)  # Čakanie na zobrazenie okna nástroja na čistenie disku
-            pyautogui.press('enter')
-            print("Running Disk Cleanup Tool")
-            print("Completed Clean Disk Tool")
-        except Exception as e:
-            print("Error running Disk Cleanup Tool:", str(e))
+        run_disk_cleanup.run_disk_cleanup_tool()
 
     # Windows update
     def open_windows_settings_update_section(self):
