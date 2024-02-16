@@ -226,23 +226,16 @@ def main():
     label = tk.Label(root, text="Select the action you want to perform:")
     label.pack()
 
-    functions_to_run = []
+    disk_cleaner = DiskCleaner()
 
-    def add_function_to_run(func):
-        functions_to_run.append(func)
-
-    def run_functions():
-        if not functions_to_run:
-            messagebox.showwarning("Warning", "Please select at least one function to run.")
-        else:
-            for func in functions_to_run:
-                func()
-            functions_to_run.clear()
+    def run_function(func):
+        try:
+            func()
+        except Exception as e:
+            print(f"Error running function: {e}")
 
     function_buttons_frame = tk.Frame(root)
     function_buttons_frame.pack()
-
-    disk_cleaner = DiskCleaner()
 
     functions = [
         ("Open Prefetch Folder", disk_cleaner.open_prefetch_folder),
@@ -264,11 +257,15 @@ def main():
     ]
 
     for function_name, func in functions:
-        button = tk.Button(function_buttons_frame, text=function_name, command=partial(add_function_to_run, func))
-        button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
+        button_frame = tk.Frame(function_buttons_frame)
+        button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
 
-    run_all_button = tk.Button(root, text="Run all selected functions", command=run_functions)
-    run_all_button.pack(pady=10)
+        button = tk.Button(button_frame, text=function_name, command=partial(run_function, func))
+        button.pack(side=tk.LEFT)
+
+        if function_name == "Close Browser":
+            all_functions_button = tk.Button(button_frame, text="Run all", command=disk_cleaner.run_all_functions)
+            all_functions_button.pack(side=tk.RIGHT)
 
     root.mainloop()
 
