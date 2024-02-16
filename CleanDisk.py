@@ -78,8 +78,10 @@ class DiskCleaner:
     def run_learix_fps(self):
         try:
             os.startfile(self.Learix_path)
-            time.sleep(1)
-            active_window = gw.getWindowsWithTitle("Learix FPS 2.0")[0]
+            time.sleep(5)
+            active_window = gw.getWindowsWithTitle("Administrator:  Learix FPS 2.0")[0]
+            pyautogui.press('1')
+            pyautogui.press('enter')
             if active_window is not None:
                 for i in range(1, 7):
                     active_window.activate()
@@ -217,18 +219,19 @@ def run_all_functions():
     disk_cleaner = DiskCleaner()
     disk_cleaner.run_all_functions()
 
-    # Define your functions here...
 
 def main():
     root = tk.Tk()
     root.title("Disk Cleaner")
 
     # Dark mode colors
-    dark_mode_bg = "#0F0F0F"
-    dark_mode_fg = "#FFFFFF"
+    dark_mode_bg = "#292929"
+    dark_mode_bc = "#1e1e1e"
+    dark_mode_fg = "#e5e5e5"
 
     # Light mode colors
     light_mode_bg = "#FFFFFF"
+    light_mode_bc = "#e5e5e5"
     light_mode_fg = "#000000"
 
     dark_mode = True
@@ -245,10 +248,12 @@ def main():
         label.config(bg=bg_color, fg=fg_color)
         function_buttons_frame.config(bg=bg_color)
         for button in function_buttons_frame.winfo_children():
-            button.config(bg=bg_color)
+            button.config(bg=bg_color)  # Zmeníme farbu pozadia tlačidiel
+
+
 
     toggle_dark_mode_button = tk.Button(root, text="Toggle Dark Mode", command=toggle_dark_mode)
-    toggle_dark_mode_button.pack()
+    toggle_dark_mode_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
     label = tk.Label(root, text="Select the action you want to perform:")
     label.pack()
@@ -262,7 +267,7 @@ def main():
             print(f"Error running function: {e}")
 
     function_buttons_frame = tk.Frame(root)
-    function_buttons_frame.pack()
+    function_buttons_frame.pack(expand=True, pady=10)
 
     functions = [
         ("Open Prefetch Folder", disk_cleaner.open_prefetch_folder),
@@ -285,14 +290,14 @@ def main():
 
     for function_name, func in functions:
         button_frame = tk.Frame(function_buttons_frame)
-        button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=5)
+        button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
         button = tk.Button(button_frame, text=function_name, command=partial(run_function, func))
         button.pack(side=tk.LEFT)
 
-        if function_name == "Close Browser":
-            all_functions_button = tk.Button(button_frame, text="Run all", command=disk_cleaner.run_all_functions)
-            all_functions_button.pack(side=tk.RIGHT)
+
+    all_functions_button = tk.Button(root, text="Run all", command=disk_cleaner.run_all_functions)
+    all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
     update_colors()  # Initialize with dark mode colors
 
