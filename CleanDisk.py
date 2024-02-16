@@ -1,12 +1,6 @@
-import os
-import subprocess
 import threading
-import time
-import pyautogui
 import pygetwindow as gw
-import webbrowser
 import ctypes
-import psutil
 import tkinter as tk
 from tkinter import messagebox
 from functools import partial
@@ -20,17 +14,20 @@ from functions import defrag
 from functions import temp
 from functions import learix_fps
 from functions import adobe
+from functions import word
+from functions import ticktick
+from functions import signalrgb
+from functions import ccleaner
+from functions import close_apps
+from functions import nvidia
+from functions import drivers_link
 
 class DiskCleaner:
     def __init__(self):
         self.running = False
         self.stop_event = threading.Event()
-        self.Word_path = r'AssetsScripts\Word.lnk'
-        self.TickTick_path = r'AssetsScripts\TickTick.lnk'
-        self.Signalrgb_path = r'AssetsScripts\SignalRgb.lnk'
-        self.Nvidia_path = r'AssetsScripts\GeForce Experience.lnk'
-        self.Ccleaner_path = r'AssetsScripts\CCleaner64.exe'
 
+    # Stop all functions
     def stop_all_functions(self):
         self.stop_event.set()
         print("All functions execution stopped.")
@@ -51,11 +48,11 @@ class DiskCleaner:
     def ms_store_update(self):
         ms_store_update.ms_store_update()
 
-    # Defragmentácia
+    # Defrag
     def defrag(self):
         defrag.defrag()
 
-    # Open Clean Temp Skript
+    # Open Clean Temp Script
     def clean_temp(self):
         temp.clean_temp()
 
@@ -69,81 +66,40 @@ class DiskCleaner:
 
     # Open Word
     def open_word(self):
-        try:
-            os.startfile(self.Word_path)
-            print("Opened Word")
-        except Exception as e:
-            print("Error opening Word:", str(e))
+        word.open_word()
 
     # Open TickTick
     def open_ticktick(self):
-        try:
-            os.startfile(self.TickTick_path)
-            print("Opened TickTick")
-        except Exception as e:
-            print("Error opening TickTick:", str(e))
+        ticktick.open_ticktick()
 
     # Open SignalRGB
     def open_signalrgb(self):
-        try:
-            os.startfile(self.Signalrgb_path)
-            print("Opened SignalRGB")
-        except Exception as e:
-            print("Error opening SignalRGB:", str(e))
+        signalrgb.open_signalrgb()
 
     # Open Nvidia Experience
     def open_nvidia(self):
-        try:
-            os.startfile(self.Nvidia_path)
-            print("Opened Nvidia Experience")
-        except Exception as e:
-            print("Error opening Nvidia Experience:", str(e))
+        nvidia.open_nvidia()
 
     # Open CCleaner
     def open_ccleaner(self):
-        try:
-            os.startfile(self.Ccleaner_path)
-            print("Opened CCleaner")
-        except Exception as e:
-            print("Error opening CCleaner:", str(e))
+        ccleaner.open_ccleaner()
 
     # Open web browser with links
     def open_drivers_link(self):
-        try:
-            webbrowser.open('https://rog.asus.com/motherboards/rog-strix/rog-strix-b550-f-gaming-model/helpdesk_download/')
-            webbrowser.open_new_tab('https://www.amd.com/en/support/chipsets/amd-socket-am4/b550')
-            print("Opened web browser with links")
-        except Exception as e:
-            print("Error opening web browser with links:", str(e))
+        drivers_link.open_drivers_link()
 
     # Close spotify
-    def close_spotify(self):
-        try:
-            for proc in psutil.process_iter():
-                if "spotify" in proc.name().lower():
-                    proc.kill()
-                    print("Spotify closed successfully.")
-                    break
-            else:
-                print("Spotify is not running.")
-        except Exception as e:
-            print("An error occurred while closing Spotify:", str(e))
-
-    # Close browser
-    def close_browser(self):
-        try:
-            subprocess.Popen('taskkill /F /IM thorium.exe', shell=True)  # Ukážeme príklad pre Chrome, ale môžete zmeniť na svoj prehliadač
-            print("Browser closed successfully.")
-        except Exception as e:
-            print("An error occurred while closing the browser:", str(e))
+    def close_apps(self):
+        close_apps.close_spotify()
+        close_apps.close_browser()
 
     def run_all_functions(self):
         functions = [
             self.learix_fps,
             self.clean_temp,
             self.run_disk_cleanup_tool,
-            self.defrag,
             self.open_prefetch,
+            self.defrag,
             self.windows_update,
             self.ms_store_update,
             self.open_adobe,
@@ -152,21 +108,14 @@ class DiskCleaner:
             self.open_signalrgb,
             self.open_nvidia,
             self.open_drivers_link,
-            self.close_spotify,
-            self.close_browser,
+            self.close_apps,
             self.open_ccleaner
         ]
-
         for func in functions:
             func()
-
         print("All functions executed successfully.")
-
         # Create a messagebox
         ctypes.windll.user32.MessageBoxW(0, "All functions executed successfully.", "Success", 0)
-
-        # Alternatively, for error handling:
-        # ctypes.windll.user32.MessageBoxW(0, "An error occurred during function execution.", "Error", 0)
 
 def run_selected_functions(functions_to_run):
     disk_cleaner = DiskCleaner()
@@ -174,13 +123,16 @@ def run_selected_functions(functions_to_run):
         func = getattr(disk_cleaner, func_name)
         func()
 
-def run_all_functions():
-    disk_cleaner = DiskCleaner()
-    disk_cleaner.run_all_functions()
+
 def main():
     root = tk.Tk()
-    root.title("Disk Cleaner")
+    # Title
+    root.title("KNX")
+    dark_mode = True
+    root.resizable(False, False)
+    disk_cleaner = DiskCleaner()
 
+    # Close the app with the "q" key
     def on_key(event):
         if event.char.lower() == "q":
             disk_cleaner.stop_all_functions()
@@ -194,8 +146,6 @@ def main():
     # Light mode colors
     light_mode_bg = "#e5e5e5"
     light_mode_fg = "#000000"
-
-    dark_mode = True
 
     def toggle_dark_mode():
         nonlocal dark_mode
@@ -221,8 +171,6 @@ def main():
     label = tk.Label(root, text="Select the action you want to perform:")
     label.pack()
 
-    disk_cleaner = DiskCleaner()
-
     def run_function(func):
         try:
             func()
@@ -230,25 +178,24 @@ def main():
             print(f"Error running function: {e}")
 
     function_buttons_frame = tk.Frame(root)
-    function_buttons_frame.pack(expand=True, pady=10)
+    function_buttons_frame.pack(expand=False, pady=10)
 
     functions = [
-        ("Open Prefetch Folder", disk_cleaner.open_prefetch),
-        ("Run Disk Cleanup Tool", disk_cleaner.run_disk_cleanup_tool),
-        ("Open Windows Update", disk_cleaner.windows_update),
-        ("Open Microsoft Store", disk_cleaner.ms_store_update),
-        ("Open Disk Defragmenter", disk_cleaner.defrag),
-        ("Run Clean Temp Script", disk_cleaner.clean_temp),
         ("Run Learix FPS Script", disk_cleaner.learix_fps),
+        ("Run Disk Cleanup", disk_cleaner.run_disk_cleanup_tool),
+        ("Run Clean Temp Script", disk_cleaner.clean_temp),
+        ("Open Prefetch Folder", disk_cleaner.open_prefetch),
+        ("Disk Defrag", disk_cleaner.defrag),
+        ("Open Windows Update", disk_cleaner.windows_update),
+        ("Open MS Store", disk_cleaner.ms_store_update),
         ("Open Adobe Creative Cloud", disk_cleaner.open_adobe),
         ("Open Word", disk_cleaner.open_word),
         ("Open TickTick", disk_cleaner.open_ticktick),
         ("Open SignalRGB", disk_cleaner.open_signalrgb),
         ("Open Nvidia Experience", disk_cleaner.open_nvidia),
-        ("Open CCleaner", disk_cleaner.open_ccleaner),
         ("Open Web Browser with Links", disk_cleaner.open_drivers_link),
-        ("Close Spotify", disk_cleaner.close_spotify),
-        ("Close Browser", disk_cleaner.close_browser)
+        ("Close Apps (Spotify, Browser)", disk_cleaner.close_apps),
+        ("Open CCleaner", disk_cleaner.open_ccleaner),
     ]
 
     for function_name, func in functions:
@@ -265,9 +212,8 @@ def main():
     stop_all_functions_button = tk.Button(root, text="Stop all", command=disk_cleaner.stop_all_functions)
     stop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
-    update_colors()  # Initialize with dark mode colors
-
+    update_colors()
     root.mainloop()
-
+    
 if __name__ == "__main__":
     main()
