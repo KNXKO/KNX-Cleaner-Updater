@@ -10,99 +10,62 @@ import psutil
 import tkinter as tk
 from tkinter import messagebox
 from functools import partial
+
+# FUNCTIONS
 from functions import open_prefetch
 from functions import run_disk_cleanup
+from functions import windows_update
+from functions import ms_store_update
+from functions import defrag
+from functions import temp
+from functions import learix_fps
+from functions import adobe
 
 class DiskCleaner:
     def __init__(self):
         self.running = False
         self.stop_event = threading.Event()
-        self.Temp_path = r'AssetsScripts\SPEEDUP.BAT'
-        self.Learix_path = r'AssetsScripts\Learix FPS.bat'
-        self.Adobe_path = r'AssetsScripts\Adobe Creative Cloud.lnk'
         self.Word_path = r'AssetsScripts\Word.lnk'
         self.TickTick_path = r'AssetsScripts\TickTick.lnk'
         self.Signalrgb_path = r'AssetsScripts\SignalRgb.lnk'
         self.Nvidia_path = r'AssetsScripts\GeForce Experience.lnk'
-        self.Ccleaner_path = r'AssetsScripts\GeForce Experience.lnk'
+        self.Ccleaner_path = r'AssetsScripts\CCleaner64.exe'
 
     def stop_all_functions(self):
         self.stop_event.set()
         print("All functions execution stopped.")
 
     # Prefetch folder
-    def open_prefetch_folder(self):
-        open_prefetch.open_prefetch_folder()
+    def open_prefetch(self):
+        open_prefetch.open_prefetch()
 
     # Čistenie disku
     def run_disk_cleanup_tool(self):
         run_disk_cleanup.run_disk_cleanup_tool()
 
     # Windows update
-    def open_windows_settings_update_section(self):
-        try:
-            os.system("start ms-settings:windowsupdate")
-            print("Opened Windows Update")
-        except Exception as e:
-            print("Error opening Windows Update:", str(e))
+    def windows_update(self):
+         windows_update.windows_update()
 
     # Microsoft store
-    def open_microsoft_store_update_section(self):
-        try:
-            os.system("start ms-windows-store:home")
-            print("Opened Microsoft Store")
-        except Exception as e:
-            print("Error opening Microsoft Store:", str(e))
+    def ms_store_update(self):
+        ms_store_update.ms_store_update()
 
     # Defragmentácia
-    def open_disk_defragmenter(self):
-        try:
-            subprocess.Popen('dfrgui.exe')
-            print("Opened Disk Defragmenter")
-        except Exception as e:
-            print("Error opening Disk Defragmenter:", str(e))
+    def defrag(self):
+        defrag.defrag()
 
     # Open Clean Temp Skript
-    def run_clean_temp(self):
-        try:
-            os.startfile(self.Temp_path)
-            print("Cleaned Temp Folder")
-        except Exception as e:
-            print("Error running Clean Temp Script:", str(e))
+    def clean_temp(self):
+        temp.clean_temp()
 
     # Open Learix FPS Script
-    def run_learix_fps(self):
-        try:
-            os.startfile(self.Learix_path)
-            time.sleep(5)
-            active_window = gw.getWindowsWithTitle("Administrator:  Learix FPS 2.0")[0]
-            pyautogui.press('1')
-            pyautogui.press('enter')
-            if active_window is not None:
-                for i in range(1, 7):
-                    active_window.activate()
-                    pyautogui.press(str(i))
-                    pyautogui.press('enter')
-                    time.sleep(5)
-                    print(str(i) + " - Done")
-                active_window.activate()
-                pyautogui.press('x')
-                pyautogui.press('enter')
-                pyautogui.press('x')
-                pyautogui.press('enter')
-                print("Learix FPS Script Done")
-            else:
-                print("Window not found.")
-        except Exception as e:
-            print("Error running Learix FPS Script:", str(e))
+    def learix_fps(self):
+       learix_fps.learix_fps()
 
     # Open Adobe Creative Cloud
     def open_adobe(self):
-        try:
-            os.startfile(self.Adobe_path)
-            print("Opened Adobe Creative Cloud")
-        except Exception as e:
-            print("Error opening Adobe Creative Cloud:", str(e))
+        adobe.open_adobe()
 
     # Open Word
     def open_word(self):
@@ -176,13 +139,13 @@ class DiskCleaner:
 
     def run_all_functions(self):
         functions = [
-            self.run_learix_fps,
-            self.run_clean_temp,
+            self.learix_fps,
+            self.clean_temp,
             self.run_disk_cleanup_tool,
-            self.open_disk_defragmenter,
-            self.open_prefetch_folder,
-            self.open_windows_settings_update_section,
-            self.open_microsoft_store_update_section,
+            self.defrag,
+            self.open_prefetch,
+            self.windows_update,
+            self.ms_store_update,
             self.open_adobe,
             self.open_word,
             self.open_ticktick,
@@ -270,13 +233,13 @@ def main():
     function_buttons_frame.pack(expand=True, pady=10)
 
     functions = [
-        ("Open Prefetch Folder", disk_cleaner.open_prefetch_folder),
+        ("Open Prefetch Folder", disk_cleaner.open_prefetch),
         ("Run Disk Cleanup Tool", disk_cleaner.run_disk_cleanup_tool),
-        ("Open Windows Update", disk_cleaner.open_windows_settings_update_section),
-        ("Open Microsoft Store", disk_cleaner.open_microsoft_store_update_section),
-        ("Open Disk Defragmenter", disk_cleaner.open_disk_defragmenter),
-        ("Run Clean Temp Script", disk_cleaner.run_clean_temp),
-        ("Run Learix FPS Script", disk_cleaner.run_learix_fps),
+        ("Open Windows Update", disk_cleaner.windows_update),
+        ("Open Microsoft Store", disk_cleaner.ms_store_update),
+        ("Open Disk Defragmenter", disk_cleaner.defrag),
+        ("Run Clean Temp Script", disk_cleaner.clean_temp),
+        ("Run Learix FPS Script", disk_cleaner.learix_fps),
         ("Open Adobe Creative Cloud", disk_cleaner.open_adobe),
         ("Open Word", disk_cleaner.open_word),
         ("Open TickTick", disk_cleaner.open_ticktick),
