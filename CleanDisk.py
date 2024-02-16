@@ -123,97 +123,89 @@ def run_selected_functions(functions_to_run):
         func = getattr(disk_cleaner, func_name)
         func()
 
-
-def main():
-    root = tk.Tk()
-    # Title
-    root.title("KNX")
-    dark_mode = True
-    root.resizable(False, False)
-    disk_cleaner = DiskCleaner()
-
-    # Close the app with the "q" key
-    def on_key(event):
-        if event.char.lower() == "q":
-            disk_cleaner.stop_all_functions()
-
-    root.bind("<Key>", on_key)
-
-    # Dark mode colors
-    dark_mode_bg = "#292929"
-    dark_mode_fg = "#e5e5e5"
-
-    # Light mode colors
-    light_mode_bg = "#e5e5e5"
-    light_mode_fg = "#000000"
-
-    def toggle_dark_mode():
-        nonlocal dark_mode
-        dark_mode = not dark_mode
-        update_colors()
-
-    def update_colors():
-        bg_color = dark_mode_bg if dark_mode else light_mode_bg
-        fg_color = dark_mode_fg if dark_mode else light_mode_fg
-        root.config(bg=bg_color)
-        #TEXT
-        label.config(bg=bg_color, fg=fg_color)
-        #POZADIE OKOLO BUTTONS
-        function_buttons_frame.config(bg=bg_color)
-
-        for button in function_buttons_frame.winfo_children():
-            button.configure(bg=bg_color)  # Nastavíme background color tlačidiel
-
-
-    toggle_dark_mode_button = tk.Button(root, text="Toggle Dark Mode", command=toggle_dark_mode)
-    toggle_dark_mode_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
-
-    label = tk.Label(root, text="Select the action you want to perform:")
-    label.pack()
-
-    def run_function(func):
-        try:
-            func()
-        except Exception as e:
-            print(f"Error running function: {e}")
-
-    function_buttons_frame = tk.Frame(root)
-    function_buttons_frame.pack(expand=False, pady=10)
-
-    functions = [
-        ("Run Learix FPS Script", disk_cleaner.learix_fps),
-        ("Run Disk Cleanup", disk_cleaner.run_disk_cleanup_tool),
-        ("Run Clean Temp Script", disk_cleaner.clean_temp),
-        ("Open Prefetch Folder", disk_cleaner.open_prefetch),
-        ("Disk Defrag", disk_cleaner.defrag),
-        ("Open Windows Update", disk_cleaner.windows_update),
-        ("Open MS Store", disk_cleaner.ms_store_update),
-        ("Open Adobe Creative Cloud", disk_cleaner.open_adobe),
-        ("Open Word", disk_cleaner.open_word),
-        ("Open TickTick", disk_cleaner.open_ticktick),
-        ("Open SignalRGB", disk_cleaner.open_signalrgb),
-        ("Open Nvidia Experience", disk_cleaner.open_nvidia),
-        ("Open Web Browser with Links", disk_cleaner.open_drivers_link),
-        ("Close Apps (Spotify, Browser)", disk_cleaner.close_apps),
-        ("Open CCleaner", disk_cleaner.open_ccleaner),
-    ]
-
-    for function_name, func in functions:
-        button_frame = tk.Frame(function_buttons_frame)
-        button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
-
-        button = tk.Button(button_frame, text=function_name, command=partial(run_function, func))
-        button.pack(side=tk.LEFT)
-
-
-    all_functions_button = tk.Button(root, text="Run all", command=disk_cleaner.run_all_functions)
-    all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
-
-    stop_all_functions_button = tk.Button(root, text="Stop all", command=disk_cleaner.stop_all_functions)
-    stop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
-
+def toggle_dark_mode():
+    root.dark_mode = not root.dark_mode
     update_colors()
-    root.mainloop()
-    
-if __name__ == "__main__":
-    main()
+
+def update_colors():
+    bg_color = "#292929" if root.dark_mode else "#e5e5e5"
+    fg_color = "#e5e5e5" if root.dark_mode else "#000000"
+    root.config(bg=bg_color)
+
+    label.config(bg=bg_color, fg=fg_color)
+    function_buttons_frame.config(bg=bg_color)
+
+    for button_frame in function_buttons_frame.winfo_children():
+        button_frame.configure(bg=bg_color)
+        for button in button_frame.winfo_children():
+            button.configure(bg=bg_color, fg=fg_color)
+
+    toggle_dark_mode_button.configure(bg=bg_color, fg=fg_color)
+    all_functions_button.configure(bg=bg_color, fg=fg_color)
+    stop_all_functions_button.configure(bg=bg_color, fg=fg_color)
+
+def on_key(event):
+    if event.char.lower() == "q":
+        disk_cleaner.stop_all_functions()
+
+
+def run_function(func):
+    try:
+        func()
+    except Exception as e:
+        print(f"Error running function: {e}")
+
+root = tk.Tk()
+root.title("KNX")
+root.resizable(False, False)
+root.dark_mode = True
+
+disk_cleaner = DiskCleaner()
+
+toggle_dark_mode_button = tk.Button(root, text="Toggle Dark Mode", command=toggle_dark_mode)
+toggle_dark_mode_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+
+label = tk.Label(root, text="Select the action you want to perform:")
+label.pack()
+
+function_buttons_frame = tk.Frame(root)
+function_buttons_frame.pack(expand=False, pady=10)
+
+functions = [
+    ("Run Learix FPS Script", disk_cleaner.learix_fps),
+    ("Run Disk Cleanup", disk_cleaner.run_disk_cleanup_tool),
+    ("Run Clean Temp Script", disk_cleaner.clean_temp),
+    ("Open Prefetch Folder", disk_cleaner.open_prefetch),
+    ("Disk Defrag", disk_cleaner.defrag),
+    ("Open Windows Update", disk_cleaner.windows_update),
+    ("Open MS Store", disk_cleaner.ms_store_update),
+    ("Open Adobe Creative Cloud", disk_cleaner.open_adobe),
+    ("Open Word", disk_cleaner.open_word),
+    ("Open TickTick", disk_cleaner.open_ticktick),
+    ("Open SignalRGB", disk_cleaner.open_signalrgb),
+    ("Open Nvidia Experience", disk_cleaner.open_nvidia),
+    ("Open Web Browser with Links", disk_cleaner.open_drivers_link),
+    ("Close Apps (Spotify, Browser)", disk_cleaner.close_apps),
+    ("Open CCleaner", disk_cleaner.open_ccleaner),
+]
+
+for function_name, func in functions:
+    button_frame = tk.Frame(function_buttons_frame)
+    button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+
+    button = tk.Button(button_frame, text=function_name, command=partial(run_function, func))
+    button.pack(side=tk.LEFT)
+
+    bg_color = "#292929" if root.dark_mode else "#e5e5e5"
+    fg_color = "#e5e5e5" if root.dark_mode else "#000000"
+    button.configure(bg=bg_color, fg=fg_color)
+
+all_functions_button = tk.Button(root, text="Run all", command=disk_cleaner.run_all_functions)
+all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+
+stop_all_functions_button = tk.Button(root, text="Stop all", command=disk_cleaner.stop_all_functions)
+stop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+
+update_colors()
+root.bind("<Key>", on_key)
+root.mainloop()
