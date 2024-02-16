@@ -1,5 +1,6 @@
 import os
 import subprocess
+import threading
 import time
 import pyautogui
 import pygetwindow as gw
@@ -13,6 +14,8 @@ from functools import partial
 
 class DiskCleaner:
     def __init__(self):
+        self.running = False
+        self.stop_event = threading.Event()
         self.Prefetch_path = r'C:\Windows\Prefetch'
         self.Temp_path = r'AssetsScripts\SPEEDUP.BAT'
         self.Learix_path = r'AssetsScripts\Learix FPS.bat'
@@ -22,6 +25,10 @@ class DiskCleaner:
         self.Signalrgb_path = r'AssetsScripts\SignalRgb.lnk'
         self.Nvidia_path = r'AssetsScripts\GeForce Experience.lnk'
         self.Ccleaner_path = r'AssetsScripts\GeForce Experience.lnk'
+
+    def stop_all_functions(self):
+        self.stop_event.set()
+        print("All functions execution stopped.")
 
     # Prefetch folder
     def open_prefetch_folder(self):
@@ -35,10 +42,10 @@ class DiskCleaner:
     def run_disk_cleanup_tool(self):
         try:
             subprocess.Popen('cleanmgr.exe')
-            print("Running Disk Cleanup Tool")
-            time.sleep(5)  # Čakanie na zobrazenie okna nástroja na čistenie disku
+            time.sleep(1)  # Čakanie na zobrazenie okna nástroja na čistenie disku
             pyautogui.press('enter')
-            print("Opened Clean Disk Tool")
+            print("Running Disk Cleanup Tool")
+            print("Completed Clean Disk Tool")
         except Exception as e:
             print("Error running Disk Cleanup Tool:", str(e))
 
@@ -218,20 +225,22 @@ def run_selected_functions(functions_to_run):
 def run_all_functions():
     disk_cleaner = DiskCleaner()
     disk_cleaner.run_all_functions()
-
-
 def main():
     root = tk.Tk()
     root.title("Disk Cleaner")
 
+    def on_key(event):
+        if event.char.lower() == "q":
+            disk_cleaner.stop_all_functions()
+
+    root.bind("<Key>", on_key)
+
     # Dark mode colors
     dark_mode_bg = "#292929"
-    dark_mode_bc = "#1e1e1e"
     dark_mode_fg = "#e5e5e5"
 
     # Light mode colors
-    light_mode_bg = "#FFFFFF"
-    light_mode_bc = "#e5e5e5"
+    light_mode_bg = "#e5e5e5"
     light_mode_fg = "#000000"
 
     dark_mode = True
@@ -245,11 +254,13 @@ def main():
         bg_color = dark_mode_bg if dark_mode else light_mode_bg
         fg_color = dark_mode_fg if dark_mode else light_mode_fg
         root.config(bg=bg_color)
+        #TEXT
         label.config(bg=bg_color, fg=fg_color)
+        #POZADIE OKOLO BUTTONS
         function_buttons_frame.config(bg=bg_color)
-        for button in function_buttons_frame.winfo_children():
-            button.config(bg=bg_color)  # Zmeníme farbu pozadia tlačidiel
 
+        for button in function_buttons_frame.winfo_children():
+            button.configure(bg=bg_color)  # Nastavíme background color tlačidiel
 
 
     toggle_dark_mode_button = tk.Button(root, text="Toggle Dark Mode", command=toggle_dark_mode)
@@ -298,6 +309,9 @@ def main():
 
     all_functions_button = tk.Button(root, text="Run all", command=disk_cleaner.run_all_functions)
     all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+
+    stop_all_functions_button = tk.Button(root, text="Stop all", command=disk_cleaner.stop_all_functions)
+    stop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
     update_colors()  # Initialize with dark mode colors
 
