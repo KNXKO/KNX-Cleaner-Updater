@@ -223,6 +223,33 @@ def main():
     root = tk.Tk()
     root.title("Disk Cleaner")
 
+    # Dark mode colors
+    dark_mode_bg = "#0F0F0F"
+    dark_mode_fg = "#FFFFFF"
+
+    # Light mode colors
+    light_mode_bg = "#FFFFFF"
+    light_mode_fg = "#000000"
+
+    dark_mode = True
+
+    def toggle_dark_mode():
+        nonlocal dark_mode
+        dark_mode = not dark_mode
+        update_colors()
+
+    def update_colors():
+        bg_color = dark_mode_bg if dark_mode else light_mode_bg
+        fg_color = dark_mode_fg if dark_mode else light_mode_fg
+        root.config(bg=bg_color)
+        label.config(bg=bg_color, fg=fg_color)
+        function_buttons_frame.config(bg=bg_color)
+        for button in function_buttons_frame.winfo_children():
+            button.config(bg=bg_color)
+
+    toggle_dark_mode_button = tk.Button(root, text="Toggle Dark Mode", command=toggle_dark_mode)
+    toggle_dark_mode_button.pack()
+
     label = tk.Label(root, text="Select the action you want to perform:")
     label.pack()
 
@@ -266,6 +293,8 @@ def main():
         if function_name == "Close Browser":
             all_functions_button = tk.Button(button_frame, text="Run all", command=disk_cleaner.run_all_functions)
             all_functions_button.pack(side=tk.RIGHT)
+
+    update_colors()  # Initialize with dark mode colors
 
     root.mainloop()
 
