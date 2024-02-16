@@ -1,6 +1,6 @@
 import os
 
-def windows_update():
+def win_update():
     try:
         os.system("start ms-settings:windowsupdate")
         print("Opened Windows Update")

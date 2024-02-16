@@ -2,7 +2,7 @@ import subprocess
 import time
 import pyautogui
 
-def run_disk_cleanup_tool():
+def run_disk_cleanup():
         try:
             subprocess.Popen('cleanmgr.exe')
             time.sleep(1)  # Čakanie na zobrazenie okna nástroja na čistenie disku
