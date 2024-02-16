@@ -123,15 +123,9 @@ def run_selected_functions(functions_to_run):
         func = getattr(disk_cleaner, func_name)
         func()
 
-def toggle_dark_mode():
-    root.dark_mode = not root.dark_mode
-    update_colors()
 
 def update_colors():
-    bg_color = "#292929" if root.dark_mode else "#e5e5e5"
-    fg_color = "#e5e5e5" if root.dark_mode else "#000000"
-    root.config(bg=bg_color)
-
+    root.config(bg="#292929")
     label.config(bg=bg_color, fg=fg_color)
     function_buttons_frame.config(bg=bg_color)
 
@@ -140,14 +134,12 @@ def update_colors():
         for button in button_frame.winfo_children():
             button.configure(bg=bg_color, fg=fg_color)
 
-    toggle_dark_mode_button.configure(bg=bg_color, fg=fg_color)
     all_functions_button.configure(bg=bg_color, fg=fg_color)
     stop_all_functions_button.configure(bg=bg_color, fg=fg_color)
 
 def on_key(event):
     if event.char.lower() == "q":
         disk_cleaner.stop_all_functions()
-
 
 def run_function(func):
     try:
@@ -159,14 +151,11 @@ root = tk.Tk()
 root.title("KNX")
 root.resizable(False, False)
 root.dark_mode = True
-
+root.option_add("*Font", "Calibri")
+label = tk.Label(root, text="KNX Cleaner & Updater", font=("Calibri", 13))
 disk_cleaner = DiskCleaner()
-
-toggle_dark_mode_button = tk.Button(root, text="Toggle Dark Mode", command=toggle_dark_mode)
-toggle_dark_mode_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
-
-label = tk.Label(root, text="Select the action you want to perform:")
 label.pack()
+
 
 function_buttons_frame = tk.Frame(root)
 function_buttons_frame.pack(expand=False, pady=10)
