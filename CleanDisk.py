@@ -1,9 +1,8 @@
-# Library
-import threading
 import threading
 import tkinter as tk
+from tkinter import scrolledtext
 from functools import partial
-# Import functions
+import sys
 from functions import disk_cleanup, prefetch, win_update, ms_store_update, \
     defrag, temp, learix_fps, adobe, word, ticktick, signalrgb, ccleaner, close_apps, \
     nvidia, drivers_link
@@ -31,9 +30,16 @@ def on_key(event):
 # Run spec function
 def run_function(func):
     try:
+        output_text.insert(tk.END, f"Running function: {func.__name__}\n")
+        output_text.insert(tk.END, f"Opened {func.__name__}\n")  # Print message for function opening
         func()
+        output_text.insert(tk.END, f"Function {func.__name__} executed successfully.\n\n")
     except Exception as e:
-        print(f"Error running function: {e}")
+        output_text.insert(tk.END, f"Error running function {func.__name__}: {e}\n\n")
+        print(f"Error running function {func.__name__}: {e}")
+    finally:
+        # Scroll to the bottom
+        output_text.see(tk.END)
 
 # Styles
 def update_colors():
@@ -54,6 +60,7 @@ root.title("KNX")
 root.resizable(False, False)
 root.option_add("*Font", "Calibri")
 root.iconbitmap("Style/logo.ico")
+
 # TOP Text
 label = tk.Label(root, text="KNX Cleaner & Updater", font=("Calibri", 13))
 label.pack()
@@ -86,7 +93,7 @@ for function_name, func in functions_mapping.items():
     button_frame = tk.Frame(function_buttons_frame)
     button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
-    button = tk.Button(button_frame, text=function_name, command=partial(run_function, func))
+    button = tk.Button(button_frame, text=function_name, command=lambda f=func: run_function(f))
     button.pack(side=tk.LEFT)
 
     bg_color = "#292929"
@@ -94,11 +101,26 @@ for function_name, func in functions_mapping.items():
     button.configure(bg=bg_color, fg=fg_color)
 
 # Bottom buttons
-all_functions_button = tk.Button(root, text="Run all", command=partial(run_selected_functions, functions_mapping.keys()))
+all_functions_button = tk.Button(root, text="Run all", command=lambda: run_selected_functions(functions_mapping.keys()))
 all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
 stop_all_functions_button = tk.Button(root, text="Stop all", command=stop_all_functions)
 stop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+
+# Output text widget (smaller size)
+output_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg="#292929", fg="#A9A9A9")
+output_text.pack(pady=10)
+
+# Redirect stdout to the output text widget
+class StdoutRedirector:
+    def __init__(self, widget):
+        self.widget = widget
+
+    def write(self, text):
+        self.widget.insert(tk.END, text)
+        self.widget.see(tk.END)  # Scroll to the bottom
+
+sys.stdout = StdoutRedirector(output_text)
 
 update_colors()
 root.bind("<Key>", on_key)
