@@ -41,6 +41,7 @@ def update_colors():
     all_functions_button.configure(bg=bg_color, fg=fg_color)
     stop_all_functions_button.configure(bg=bg_color, fg=fg_color)
 
+# Global Windows: Title, Window, Font, Icon
 root = ctk.CTk()
 root.title("KNX")
 root.resizable(False, False)
@@ -86,7 +87,7 @@ for function_name, func in functions_mapping.items():
     fg_color = "#A9A9A9"
     button.configure(bg=bg_color, fg=fg_color)
 
-# Style: Nastaviť ikonu pre hlavné okno aplikácie (tkinter)
+# Style: Custom Script Icon
 icon_path = "Style/logo.ico"
 root.iconbitmap(default=icon_path)
 
@@ -97,11 +98,11 @@ all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 stop_all_functions_button = tk.Button(root, text="Stop all", command=stop_all_functions)
 stop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
-# Bottom Output text widget (smaller size)
+# Bottom, Style: Output Text Widget
 output_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg="#292929", fg="#A9A9A9")
 output_text.pack(pady=10)
 
-# Run spec function
+# Bottom: Function to Output Text
 def run_function(func):
     try:
         output_text.insert(tk.END, f"Running function: {func.__name__}\n")
@@ -112,10 +113,10 @@ def run_function(func):
         output_text.insert(tk.END, f"Error running function {func.__name__}: {e}\n\n")
         print(f"Error running function {func.__name__}: {e}")
     finally:
-        # Scroll to the bottom
+        # AutoScroll to the bottom
         output_text.see(tk.END)
 
-# Class Bottom Output text widget - Redirect stdout to the output text widget
+# Class Bottom Output Text - Redirect stdout to the output text widget
 class StdoutRedirector:
     def __init__(self, widget):
         self.widget = widget
