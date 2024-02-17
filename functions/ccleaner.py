@@ -1,6 +1,6 @@
 import os
 
-ccleaner_path = ("AssetsScripts\CCleaner64.exe")
+ccleaner_path = 'AssetsScripts\CCleaner64.exe'
 
 def open_ccleaner():
     try:

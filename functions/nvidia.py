@@ -1,9 +1,10 @@
 import os
-nvidia_path = ("AssetsScripts\GeForce Experience.lnk")
+
+nvidia_path = r'AssetsScripts\GeForce Experience.lnk'
 
 def open_nvidia():
     try:
-        os.startfile(nvidia_path, "r")
+        os.startfile(nvidia_path)
         print("Opened Nvidia Experience")
     except Exception as e:
         print("Error opening Nvidia Experience:", str(e))

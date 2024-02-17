@@ -1,5 +1,6 @@
 import os
-temp_path = "AssetsScripts\SPEEDUP.BAT"
+
+temp_path = r'AssetsScripts\SPEEDUP.BAT'
 
 def clean_temp():
     try:

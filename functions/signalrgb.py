@@ -1,5 +1,6 @@
 import os
-signalrgb_path = ("AssetsScripts\SignalRgb.lnk")
+
+signalrgb_path = r'AssetsScripts\SignalRgb.lnk'
 
 def open_signalrgb():
     try:

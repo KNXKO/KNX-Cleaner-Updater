@@ -1,5 +1,6 @@
 import os
-prefetch_path = 'C:\Windows\Prefetch'
+
+prefetch_path = r'C:\Windows\Prefetch'
 
 def open_prefetch():
     try:

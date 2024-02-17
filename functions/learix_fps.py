@@ -2,7 +2,8 @@ import pyautogui
 import os
 import time
 import pygetwindow as gw
-learix_path = "AssetsScripts\Learix FPS.bat"
+
+learix_path = r'AssetsScripts\Learix FPS.bat'
 
 def learix_fps():
         try:

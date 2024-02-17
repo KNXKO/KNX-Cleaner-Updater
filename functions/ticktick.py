@@ -1,5 +1,6 @@
 import os
-ticktick_path = ("AssetsScripts\TickTick.lnk")
+
+ticktick_path = r'AssetsScripts\TickTick.lnk'
 
 def open_ticktick():
     try:

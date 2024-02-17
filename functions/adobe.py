@@ -1,5 +1,6 @@
 import os
-adobe_path = ("AssetsScripts\Adobe Creative Cloud.lnk")
+
+adobe_path = r'AssetsScripts\Adobe Creative Cloud.lnk'
 
 def open_adobe():
     try:

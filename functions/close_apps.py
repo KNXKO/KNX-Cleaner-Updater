@@ -4,13 +4,8 @@ import subprocess
 # Close Spotify
 def close_spotify():
     try:
-        for proc in psutil.process_iter():
-            if "spotify" in proc.name().lower():
-                proc.kill()
-                print("Spotify closed successfully.")
-                break
-        else:
-            print("Spotify is not running.")
+        subprocess.Popen('taskkill /F /IM Spotify.exe', shell=True)
+        print("Spotify closed successfully.")
     except Exception as e:
         print("An error occurred while closing Spotify:", str(e))
 

@@ -1,5 +1,6 @@
 import os
-word_path = ("AssetsScripts\Word.lnk")
+
+word_path = r'AssetsScripts\Word.lnk'
 
 def open_word():
     try:

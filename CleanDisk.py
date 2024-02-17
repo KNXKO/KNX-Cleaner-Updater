@@ -1,11 +1,11 @@
 import threading
 import tkinter as tk
 from tkinter import scrolledtext
+import customtkinter as ctk
 from functools import partial
 import sys
 from functions import disk_cleanup, prefetch, win_update, ms_store_update, \
-    defrag, temp, learix_fps, adobe, word, ticktick, signalrgb, ccleaner, close_apps, \
-    nvidia, drivers_link
+    defrag, temp, learix_fps, adobe, word, ticktick, signalrgb, ccleaner, close_apps, nvidia, drivers_link
 
 # Define stop_event as a global variable
 stop_event = threading.Event()
@@ -27,21 +27,7 @@ def on_key(event):
     if event.char.lower() == "q":
         stop_all_functions()
 
-# Run spec function
-def run_function(func):
-    try:
-        output_text.insert(tk.END, f"Running function: {func.__name__}\n")
-        output_text.insert(tk.END, f"Opened {func.__name__}\n")  # Print message for function opening
-        func()
-        output_text.insert(tk.END, f"Function {func.__name__} executed successfully.\n\n")
-    except Exception as e:
-        output_text.insert(tk.END, f"Error running function {func.__name__}: {e}\n\n")
-        print(f"Error running function {func.__name__}: {e}")
-    finally:
-        # Scroll to the bottom
-        output_text.see(tk.END)
-
-# Styles
+# Styles: Dark Color
 def update_colors():
     root.config(bg="#292929")
     label.config(bg=bg_color, fg=fg_color)
@@ -55,13 +41,13 @@ def update_colors():
     all_functions_button.configure(bg=bg_color, fg=fg_color)
     stop_all_functions_button.configure(bg=bg_color, fg=fg_color)
 
-root = tk.Tk()
+root = ctk.CTk()
 root.title("KNX")
 root.resizable(False, False)
 root.option_add("*Font", "Calibri")
 root.iconbitmap("Style/logo.ico")
 
-# TOP Text
+# Style: TOP Text
 label = tk.Label(root, text="KNX Cleaner & Updater", font=("Calibri", 13))
 label.pack()
 
@@ -69,7 +55,7 @@ label.pack()
 function_buttons_frame = tk.Frame(root)
 function_buttons_frame.pack(expand=False, pady=10)
 
-# Function buttons
+# Functions with Text properties
 functions_mapping = {
     "Run Learix FPS Script": learix_fps.learix_fps,
     "Run Disk Cleanup": disk_cleanup.run_disk_cleanup,
@@ -100,6 +86,10 @@ for function_name, func in functions_mapping.items():
     fg_color = "#A9A9A9"
     button.configure(bg=bg_color, fg=fg_color)
 
+# Style: Nastaviť ikonu pre hlavné okno aplikácie (tkinter)
+icon_path = "Style/logo.ico"
+root.iconbitmap(default=icon_path)
+
 # Bottom buttons
 all_functions_button = tk.Button(root, text="Run all", command=lambda: run_selected_functions(functions_mapping.keys()))
 all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
@@ -107,11 +97,25 @@ all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 stop_all_functions_button = tk.Button(root, text="Stop all", command=stop_all_functions)
 stop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
-# Output text widget (smaller size)
+# Bottom Output text widget (smaller size)
 output_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg="#292929", fg="#A9A9A9")
 output_text.pack(pady=10)
 
-# Redirect stdout to the output text widget
+# Run spec function
+def run_function(func):
+    try:
+        output_text.insert(tk.END, f"Running function: {func.__name__}\n")
+        output_text.insert(tk.END, f"Opened {func.__name__}\n")  # Print message for function opening
+        func()
+        output_text.insert(tk.END, f"Function {func.__name__} executed successfully.\n\n")
+    except Exception as e:
+        output_text.insert(tk.END, f"Error running function {func.__name__}: {e}\n\n")
+        print(f"Error running function {func.__name__}: {e}")
+    finally:
+        # Scroll to the bottom
+        output_text.see(tk.END)
+
+# Class Bottom Output text widget - Redirect stdout to the output text widget
 class StdoutRedirector:
     def __init__(self, widget):
         self.widget = widget
@@ -119,9 +123,13 @@ class StdoutRedirector:
     def write(self, text):
         self.widget.insert(tk.END, text)
         self.widget.see(tk.END)  # Scroll to the bottom
-
 sys.stdout = StdoutRedirector(output_text)
 
 update_colors()
 root.bind("<Key>", on_key)
-root.mainloop()
+
+try:
+    root.mainloop()
+except KeyboardInterrupt:
+    print("Quitting... by keyboard interrupt")
+    sys.exit()
