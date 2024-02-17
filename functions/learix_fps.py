@@ -17,7 +17,7 @@ def learix_fps():
                     active_window.activate()
                     pyautogui.press(str(i))
                     pyautogui.press('enter')
-                    time.sleep(5)
+                    time.sleep(8)
                     print(str(i) + " - Done")
                 active_window.activate()
                 pyautogui.press('x')

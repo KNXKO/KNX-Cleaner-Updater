@@ -2,10 +2,10 @@ import threading
 import tkinter as tk
 from tkinter import scrolledtext
 import customtkinter as ctk
-from functools import partial
 import sys
+import time
 from functions import disk_cleanup, prefetch, win_update, ms_store_update, \
-    defrag, temp, learix_fps, adobe, word, ticktick, signalrgb, ccleaner, close_apps, nvidia, drivers_link
+    defrag, temp, learix_fps, adobe, word, ticktick, signalrgb, ccleaner, close_apps, nvidia, drivers_link, winget
 
 # Define stop_event as a global variable
 stop_event = threading.Event()
@@ -17,10 +17,16 @@ def stop_all_functions():
 
 # Start all functions
 def run_selected_functions(functions_to_run):
+    threads = []
     for func_name in functions_to_run:
         func = functions_mapping.get(func_name)
         if func:
-            func()
+            thread = threading.Thread(target=func)
+            thread.start()
+            threads.append(thread)
+    # Wait for all threads to complete
+    for thread in threads:
+        thread.join()
 
 # Stop all functions when pressing "q"
 def on_key(event):
@@ -109,6 +115,8 @@ def run_function(func):
         output_text.insert(tk.END, f"Opened {func.__name__}\n")  # Print message for function opening
         func()
         output_text.insert(tk.END, f"Function {func.__name__} executed successfully.\n\n")
+        print("2s Pauza")
+        time.sleep(2)
     except Exception as e:
         output_text.insert(tk.END, f"Error running function {func.__name__}: {e}\n\n")
         print(f"Error running function {func.__name__}: {e}")
