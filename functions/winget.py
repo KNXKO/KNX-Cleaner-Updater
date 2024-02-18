@@ -3,8 +3,9 @@ import sys
 
 def run_winget():
     try:
-        cmd = 'winget upgrade && winget update --all'
-        subprocess.run(["cmd", "/c", cmd], check=True)
+        cmd = 'cmd /k winget upgrade && winget update --all'
+        subprocess.run(cmd, shell=True, check=True)
+        print("Windows applications have been successfully updated.")
     except subprocess.CalledProcessError:
         print("Error: Failed to run the command.")
         sys.exit(1)
