@@ -5,7 +5,7 @@ import customtkinter as ctk
 import sys
 import time
 from functions import disk_cleanup, prefetch, win_update, ms_store_update, \
-    defrag, temp, learix_fps, adobe, word, ticktick, signalrgb, ccleaner, close_apps, nvidia, drivers_link, winget
+    defrag, temp, learix_fps, adobe, word, ticktick, signalrgb, ccleaner, close_apps, nvidia, drivers_link, bcdedit_optimizer, log_files, windows_optimize
 
 # Define stop_event as a global variable
 stop_event = threading.Event()
@@ -67,6 +67,9 @@ functions_mapping = {
     "Run Learix FPS Script": learix_fps.learix_fps,
     "Run Disk Cleanup": disk_cleanup.run_disk_cleanup,
     "Run Clean Temp Script": temp.clean_temp,
+    "Run Bcdedit Optimizer Script": bcdedit_optimizer.run_bcdedit,
+    "Run Log Files Cleaner Script": log_files.run_logfiles,
+     "Run Windows Optimize Script": windows_optimize.run_win_optimize,
     "Open Prefetch Folder": prefetch.open_prefetch,
     "Disk Defrag": defrag.defrag,
     "Open Windows Update": win_update.win_update,
