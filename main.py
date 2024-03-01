@@ -17,12 +17,22 @@ def stop_all_functions():
 
 # Start all functions sequentially with a pause between each
 def run_selected_functions(functions_to_run):
+    threads = []
     for func_name in functions_to_run:
         func = functions_mapping.get(func_name)
         if func:
-            run_function(func)
-            root.update()  # Update the GUI to keep it responsive
-            time.sleep(1)
+            thread = threading.Thread(target=run_function_with_pause, args=(func,))
+            thread.start()
+            threads.append(thread)
+            time.sleep(1)  # Add 1 second pause after starting each function
+    # Wait for all threads to complete
+    for thread in threads:
+        thread.join()
+
+# Function to run with pause
+def run_function_with_pause(func):
+    run_function(func)
+    time.sleep(1)
 
 # Stop all functions when pressing "q"
 def on_key(event):
