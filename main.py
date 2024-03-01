@@ -17,22 +17,12 @@ def stop_all_functions():
 
 # Start all functions sequentially with a pause between each
 def run_selected_functions(functions_to_run):
-    threads = []
     for func_name in functions_to_run:
         func = functions_mapping.get(func_name)
         if func:
-            thread = threading.Thread(target=run_function_with_pause, args=(func,))
-            thread.start()
-            threads.append(thread)
-            time.sleep(1)  # Add 1 second pause after starting each function
-    # Wait for all threads to complete
-    for thread in threads:
-        thread.join()
-
-# Function to run with pause
-def run_function_with_pause(func):
-    run_function(func)
-    time.sleep(1)
+            run_function(func)
+            root.update()  # Update the GUI to keep it responsive
+            time.sleep(1)
 
 # Stop all functions when pressing "q"
 def on_key(event):
@@ -86,7 +76,7 @@ functions_mapping = {
     "Open SignalRGB": signalrgb.open_signalrgb,
     "Open Nvidia Experience": nvidia.open_nvidia,
     "Open Web Browser with Links": drivers_link.open_drivers_link,
-    "Close Apps (Spotify, Browser)":lambda: (close_apps.close_spotify(), close_apps.close_browser()),
+    "Close Apps (Spotify)": close_apps.close_apps,
     "Open CCleaner": ccleaner.open_ccleaner,
 }
 
@@ -121,8 +111,7 @@ output_text.pack(pady=10)
 def run_function(func):
     try:
         output_text.insert(tk.END, f"Running function: {func.__name__}\n")
-        output_text.insert(tk.END, f"Opened {func.__name__}\n")  # Print message for function opening
-        func()
+        func()  # Call the function directly without extra output
         output_text.insert(tk.END, f"Function {func.__name__} executed successfully.\n\n")
         print("1s Pauza")
         root.update()  # Update the GUI to keep it responsive

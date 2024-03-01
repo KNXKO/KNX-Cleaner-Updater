@@ -8,7 +8,7 @@ learix_path = r'AssetsScripts\Learix FPS.bat'
 def learix_fps():
         try:
             os.startfile(learix_path)
-            time.sleep(3)
+            time.sleep(5)
             active_window = gw.getWindowsWithTitle("Administrator:  Learix FPS 2.0")[0]
             pyautogui.press('1')
             pyautogui.press('enter')
