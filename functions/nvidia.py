@@ -1,6 +1,6 @@
 import os
 
-nvidia_path = r'AssetsScripts\NVIDIA.Ink'
+nvidia_path = r'AssetsScripts\NVIDIA.lnk'
 
 def open_nvidia():
     try:

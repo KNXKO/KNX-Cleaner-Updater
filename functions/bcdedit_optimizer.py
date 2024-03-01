@@ -5,6 +5,6 @@ bcdedit_path = r'AssetsScripts\Bcdedit Optimizer.cmd'
 def run_bcdedit():
     try:
         os.startfile(bcdedit_path)
-        print("Bcdedit Optimizer Script executed successfully.")
+        print("Opened Bcdedit Optimizer Script")
     except Exception as e:
-        print("Error running Bcdedit Optimizer Script:", str(e))
+        print("Error opening Bcdedit Optimizer Script:", str(e))

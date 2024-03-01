@@ -22,12 +22,6 @@ def run_selected_functions(functions_to_run):
         if func:
             run_function(func)
             root.update()  # Update the GUI to keep it responsive
-            time.sleep(1)
-
-# Stop all functions when pressing "q"
-def on_key(event):
-    if event.char.lower() == "q":
-        stop_all_functions()
 
 # Styles: Dark Color
 def update_colors():
@@ -74,7 +68,7 @@ functions_mapping = {
     "Open Word": word.open_word,
     "Open TickTick": ticktick.open_ticktick,
     "Open SignalRGB": signalrgb.open_signalrgb,
-    "Open Nvidia Experience": nvidia.open_nvidia,
+    "Open Nvidia App": nvidia.open_nvidia,
     "Open Web Browser with Links": drivers_link.open_drivers_link,
     "Close Apps (Spotify)": close_apps.close_apps,
     "Open CCleaner": ccleaner.open_ccleaner,
@@ -110,16 +104,15 @@ output_text.pack(pady=10)
 # Bottom: Function to Output Text
 def run_function(func):
     try:
-        output_text.insert(tk.END, f"Running function: {func.__name__}\n")
         func()  # Call the function directly without extra output
-        output_text.insert(tk.END, f"Function {func.__name__} executed successfully.\n\n")
-        print("1s Pauza")
         root.update()  # Update the GUI to keep it responsive
-        time.sleep(1)
+        print(f"Function {func.__name__} Completed!")
     except Exception as e:
-        output_text.insert(tk.END, f"Error running function {func.__name__}: {e}\n\n")
         print(f"Error running function {func.__name__}: {e}")
     finally:
+        if not stop_event.is_set():  # Add condition to check if the function was stopped
+            print("Pauza 0.5s...")
+            time.sleep(0.5)  # 0.5 second pause
         output_text.see(tk.END)
 
 # Class Bottom Output Text - Redirect stdout to the output text widget
@@ -133,7 +126,6 @@ class StdoutRedirector:
 sys.stdout = StdoutRedirector(output_text)
 
 update_colors()
-root.bind("<Key>", on_key)
 
 try:
     root.mainloop()

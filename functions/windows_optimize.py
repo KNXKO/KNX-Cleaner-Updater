@@ -5,6 +5,6 @@ win_optimize_path = r'AssetsScripts\Windows Optimization.bat'
 def run_win_optimize():
     try:
         os.startfile(win_optimize_path)
-        print("Windows Optimize Script executed successfully.")
+        print("Opened Windows Optimize Script")
     except Exception as e:
-        print("Error running Windows Optimize Script:", str(e))
+        print("Error openning Windows Optimize Script:", str(e))

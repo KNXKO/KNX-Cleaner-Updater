@@ -7,7 +7,6 @@ def run_disk_cleanup():
             subprocess.Popen('cleanmgr.exe')
             time.sleep(1) # Wait for the window to open
             pyautogui.press('enter')
-            print("Running Disk Cleanup Tool")
-            print("Completed Clean Disk Tool")
+            print("Opened Disk Cleanup Tool")
         except Exception as e:
-            print("Error running Disk Cleanup Tool:", str(e))
+            print("Error opening Disk Cleanup Tool:", str(e))

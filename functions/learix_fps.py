@@ -6,26 +6,38 @@ import pygetwindow as gw
 learix_path = r'AssetsScripts\Learix FPS.bat'
 
 def learix_fps():
-        try:
-            os.startfile(learix_path)
-            time.sleep(5)
-            active_window = gw.getWindowsWithTitle("Administrator:  Learix FPS 2.0")[0]
-            pyautogui.press('1')
+    try:
+        os.startfile(learix_path)
+
+        # Čakanie na zobrazenie okna s názvom "Administrator:  Learix FPS 2.0" do 5 sekúnd
+        timeout = time.time() + 5  # Nastavenie maximálneho času čakania na 5 sekúnd
+        while True:
+            active_window = gw.getWindowsWithTitle("Administrator:  Learix FPS 2.0")
+            if active_window:  # Ak sme našli okno
+                active_window = active_window[0]
+                break
+            if time.time() > timeout:  # Ak prekročíme maximálny čas čakania
+                raise TimeoutError("Timeout: Window not found.")
+            time.sleep(1)  # Počkáme sekundu a skúsim to znova
+
+        # Aktivácia okna
+        active_window.activate()
+        pyautogui.press('1')
+        pyautogui.press('enter')
+
+        # Cyklus pre stlačenie ďalších klávesov a Enter
+        for i in range(1, 7):
+            active_window.activate()
+            pyautogui.press(str(i))
             pyautogui.press('enter')
-            if active_window is not None:
-                for i in range(1, 7):
-                    active_window.activate()
-                    pyautogui.press(str(i))
-                    pyautogui.press('enter')
-                    time.sleep(8)
-                    print(str(i) + " - Done")
-                active_window.activate()
-                pyautogui.press('x')
-                pyautogui.press('enter')
-                pyautogui.press('x')
-                pyautogui.press('enter')
-                print("Learix FPS Script Done")
-            else:
-                print("Window not found.")
-        except Exception as e:
-            print("Error running Learix FPS Script:", str(e))
+            time.sleep(8)
+            print(str(i) + " - Done")
+
+        active_window.activate()
+        for _ in range(2):
+            pyautogui.press('x')
+            pyautogui.press('enter')
+
+        print("Learix FPS Script Done")
+    except Exception as e:
+        print("Error running Learix FPS Script:", str(e))
