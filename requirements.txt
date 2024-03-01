@@ -1,2 +1,10 @@
 pygetwindow
 ctypes
+customtkinter
+tkinter
+os
+time
+sys
+subprocess
+pyautogui
+webbrowser
