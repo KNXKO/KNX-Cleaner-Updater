@@ -4,11 +4,11 @@ KNX Cleaner & Updater is a Python application designed to automate various syste
 
 ## Features
 
-- Run various maintenance tasks with a single click.
-- User-friendly interface with descriptive buttons for each function.
-- Ability to run individual functions or all functions at once.
-- Real-time logging of function execution and errors.
-- Stop all functions at once by pressing "q".
+- **User-friendly Interface:** The application provides an intuitive graphical user interface (GUI) for easy navigation and operation.
+- **Multiple Maintenance Functions:** KNX Cleaner & Updater offers a range of system maintenance functions, including disk cleanup, prefetch management, Windows updates, application optimizations, and more.
+- **Run All or Individual Functions:** Users can choose to run all available functions simultaneously or select specific functions to execute.
+- **Output Logging:** Output messages from each function execution are displayed in the application's output window, providing real-time feedback to the user.
+- **Stop All Functions:** Users have the option to stop all running functions with a single click, ensuring control and flexibility during maintenance tasks.
 
 ## Installation
 
@@ -28,8 +28,10 @@ KNX Cleaner & Updater is a Python application designed to automate various syste
 
 - Python 3.x
 - tkinter (included in standard library)
+- customtkinter
 - pygetwindow
 - ctypes
+- os
 - ...
 
 ## Contributing
@@ -38,4 +40,4 @@ Contributions are welcome! If you have any ideas for new features, improvements,
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
