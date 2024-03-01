@@ -2,3 +2,7 @@ functions/__pycache__/
 AssetsScripts/DATA
 AssetsScripts/LOG
 TODO.txt
+__pycache__/
+dist/
+build/
+*.spec
