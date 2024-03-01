@@ -1,4 +1,3 @@
-import psutil
 import subprocess
 
 # Close Spotify
@@ -9,6 +8,7 @@ def close_spotify():
     except Exception as e:
         print("An error occurred while closing Spotify:", str(e))
 
+''' No need to close
 # Close browser
 def close_browser():
     try:
@@ -16,3 +16,4 @@ def close_browser():
         print("Browser closed successfully.")
     except Exception as e:
         print("An error occurred while closing the browser:", str(e))
+'''

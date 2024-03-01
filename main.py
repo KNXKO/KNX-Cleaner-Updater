@@ -15,19 +15,14 @@ def stop_all_functions():
     stop_event.set()
     print("All functions execution stopped.")
 
-# Start all functions
+# Start all functions sequentially with a pause between each
 def run_selected_functions(functions_to_run):
-    threads = []
     for func_name in functions_to_run:
         func = functions_mapping.get(func_name)
         if func:
-            thread = threading.Thread(target=func)
-            thread.start()
-            threads.append(thread)
-    # Wait for all threads to complete
-    for thread in threads:
-        thread.join()
-
+            run_function(func)
+            time.sleep(1)
+            
 # Stop all functions when pressing "q"
 def on_key(event):
     if event.char.lower() == "q":
