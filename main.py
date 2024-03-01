@@ -21,8 +21,9 @@ def run_selected_functions(functions_to_run):
         func = functions_mapping.get(func_name)
         if func:
             run_function(func)
+            root.update()  # Update the GUI to keep it responsive
             time.sleep(1)
-            
+
 # Stop all functions when pressing "q"
 def on_key(event):
     if event.char.lower() == "q":
@@ -113,13 +114,13 @@ def run_function(func):
         output_text.insert(tk.END, f"Opened {func.__name__}\n")  # Print message for function opening
         func()
         output_text.insert(tk.END, f"Function {func.__name__} executed successfully.\n\n")
-        print("2s Pauza")
-        time.sleep(2)
+        print("1s Pauza")
+        root.update()  # Update the GUI to keep it responsive
+        time.sleep(1)
     except Exception as e:
         output_text.insert(tk.END, f"Error running function {func.__name__}: {e}\n\n")
         print(f"Error running function {func.__name__}: {e}")
     finally:
-        # AutoScroll to the bottom
         output_text.see(tk.END)
 
 # Class Bottom Output Text - Redirect stdout to the output text widget
