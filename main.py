@@ -60,7 +60,7 @@ functions_mapping = {
     "Run Bcdedit Optimizer Script": bcdedit_optimizer.run_bcdedit,
     "Run Log Files Cleaner Script": log_files.run_logfiles,
      "Run Windows Optimize Script": windows_optimize.run_win_optimize,
-    "Flush Dns": ipconfig.flush_dns,
+    "Flush DNS": ipconfig.flush_dns,
     "Sfc /scannow": sfc_scannow.run_sfc_scan,
     "Winget update":winget.run_winget,
     "Open Prefetch Folder": prefetch.open_prefetch,
