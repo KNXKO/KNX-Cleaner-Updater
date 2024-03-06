@@ -42,7 +42,7 @@ root = ctk.CTk()
 root.title("KNX")
 root.resizable(False, False)
 root.option_add("*Font", "Calibri")
-root.iconbitmap("Style/logo.ico")
+root.iconbitmap("icon.ico")
 
 # Style: TOP Text
 label = tk.Label(root, text="KNX Cleaner & Updater", font=("Calibri", 13))
@@ -61,8 +61,8 @@ functions_mapping = {
     "Run Log Files Cleaner Script": log_files.run_logfiles,
      "Run Windows Optimize Script": windows_optimize.run_win_optimize,
     "Flush DNS": ipconfig.flush_dns,
-    "Sfc /scannow": sfc_scannow.run_sfc_scan,
-    "Winget update":winget.run_winget,
+    "Run SFC /scannow": sfc_scannow.run_sfc_scan,
+    "Update Winget":winget.run_winget,
     "Open Prefetch Folder": prefetch.open_prefetch,
     "Disk Defrag": defrag.defrag,
     "Open Windows Update": win_update.win_update,
@@ -90,7 +90,7 @@ for function_name, func in functions_mapping.items():
     button.configure(bg=bg_color, fg=fg_color)
 
 # Style: Custom Script Icon
-icon_path = "Style/logo.ico"
+icon_path = "icon.ico"
 root.iconbitmap(default=icon_path)
 
 # Bottom buttons

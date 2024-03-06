@@ -6,4 +6,4 @@ __pycache__/
 dist/
 build/
 *.spec
-*.exe
+ShowWindowTitles.py
