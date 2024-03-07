@@ -40,7 +40,7 @@ def update_colors():
 # Global Windows: Title, Window, Font, Icon
 root = ctk.CTk()
 root.title("KNX")
-root.resizable(False, False)
+root.resizable(False, True)
 root.option_add("*Font", "Calibri")
 root.iconbitmap("icon.ico")
 
