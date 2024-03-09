@@ -48,9 +48,25 @@ root.iconbitmap("icon.ico")
 label = tk.Label(root, text="KNX Cleaner & Updater", font=("Calibri", 13))
 label.pack()
 
-# Style: Create function buttons frame
-function_buttons_frame = tk.Frame(root)
-function_buttons_frame.pack(expand=False, pady=10)
+# Create canvas with background color
+canvas = tk.Canvas(root, bg="#292929", width=250, height=400, highlightthickness=0)
+canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+# Create function buttons frame
+function_buttons_frame = tk.Frame(canvas, bg="#292929")
+
+# Add a scrollbar to the canvas
+scrollbar = ctk.CTkScrollbar(root, command=canvas.yview,)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+# Configure canvas and scrollbar
+canvas.configure(yscrollcommand=scrollbar.set)
+canvas.create_window((0, 0), window=function_buttons_frame, anchor=tk.NW)
+
+# Update the canvas scroll region after adding widgets
+function_buttons_frame.update_idletasks()
+canvas.configure(scrollregion=canvas.bbox("all"))
+
 
 # Functions with Text properties
 functions_mapping = {
@@ -59,7 +75,7 @@ functions_mapping = {
     "Run Clean Temp Script": temp.clean_temp,
     "Run Bcdedit Optimizer Script": bcdedit_optimizer.run_bcdedit,
     "Run Log Files Cleaner Script": log_files.run_logfiles,
-     "Run Windows Optimize Script": windows_optimize.run_win_optimize,
+    "Run Windows Optimize Script": windows_optimize.run_win_optimize,
     "Flush DNS": ipconfig.flush_dns,
     "Run SFC /scannow": sfc_scannow.run_sfc_scan,
     "Update Winget":winget.run_winget,
@@ -88,6 +104,10 @@ for function_name, func in functions_mapping.items():
     bg_color = "#292929"
     fg_color = "#A9A9A9"
     button.configure(bg=bg_color, fg=fg_color)
+
+# Update the canvas scroll region after adding widgets
+function_buttons_frame.update_idletasks()
+canvas.configure(scrollregion=canvas.bbox("all"))
 
 # Style: Custom Script Icon
 icon_path = "icon.ico"
