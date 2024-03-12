@@ -63,10 +63,11 @@ scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 canvas.configure(yscrollcommand=scrollbar.set)
 canvas.create_window((0, 0), window=function_buttons_frame, anchor=tk.NW)
 
-# Update the canvas scroll region after adding widgets
-function_buttons_frame.update_idletasks()
-canvas.configure(scrollregion=canvas.bbox("all"))
+# Function to scroll the canvas with the mouse wheel
+def on_canvas_mouse_wheel(event):
+    canvas.yview_scroll(-1*(event.delta//120), "units")
 
+canvas.bind_all("<MouseWheel>", on_canvas_mouse_wheel)
 
 # Functions with Text properties
 functions_mapping = {
