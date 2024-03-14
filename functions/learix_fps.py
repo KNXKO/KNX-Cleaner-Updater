@@ -8,7 +8,6 @@ learix_path = r'AssetsScripts\Learix FPS.bat'
 def learix_fps():
     try:
         os.startfile(learix_path)
-
         # Čakanie na zobrazenie okna s názvom "Administrator:  Learix FPS 2.0" do 5 sekúnd
         timeout = time.time() + 5  # Nastavenie maximálneho času čakania na 5 sekúnd
         while True:

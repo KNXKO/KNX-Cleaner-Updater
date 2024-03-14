@@ -71,15 +71,15 @@ canvas.bind_all("<MouseWheel>", on_canvas_mouse_wheel)
 
 # Functions with Text properties
 functions_mapping = {
-    "Run Learix FPS Script": learix_fps.learix_fps,
+    #"Run Learix FPS Script": learix_fps.learix_fps,
     "Run Disk Cleanup": disk_cleanup.run_disk_cleanup,
     "Run Clean Temp Script": temp.clean_temp,
     "Run Bcdedit Optimizer Script": bcdedit_optimizer.run_bcdedit,
     "Run Log Files Cleaner Script": log_files.run_logfiles,
     "Run Windows Optimize Script": windows_optimize.run_win_optimize,
     "Flush DNS": ipconfig.flush_dns,
-    "Run SFC /scannow": sfc_scannow.run_sfc_scan,
-    "Update Winget":winget.run_winget,
+    #"Run SFC /scannow": sfc_scannow.run_sfc_scan,
+    #"Update Winget":winget.run_winget,
     "Open Prefetch Folder": prefetch.open_prefetch,
     "Disk Defrag": defrag.defrag,
     "Open Windows Update": win_update.win_update,
