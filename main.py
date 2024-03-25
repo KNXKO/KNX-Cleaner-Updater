@@ -21,7 +21,7 @@ def run_selected_functions(functions_to_run):
         func = functions_mapping.get(func_name)
         if func:
             run_function(func)
-            root.update()  # Update the GUI to keep it responsive
+            root.update()
 
 # Styles: Dark Color
 def update_colors():
@@ -71,15 +71,12 @@ canvas.bind_all("<MouseWheel>", on_canvas_mouse_wheel)
 
 # Functions with Text properties
 functions_mapping = {
-    #"Run Learix FPS Script": learix_fps.learix_fps,
     "Run Disk Cleanup": disk_cleanup.run_disk_cleanup,
     "Run Clean Temp Script": temp.clean_temp,
     "Run Bcdedit Optimizer Script": bcdedit_optimizer.run_bcdedit,
     "Run Log Files Cleaner Script": log_files.run_logfiles,
     "Run Windows Optimize Script": windows_optimize.run_win_optimize,
     "Flush DNS": ipconfig.flush_dns,
-    #"Run SFC /scannow": sfc_scannow.run_sfc_scan,
-    #"Update Winget":winget.run_winget,
     "Open Prefetch Folder": prefetch.open_prefetch,
     "Disk Defrag": defrag.defrag,
     "Open Windows Update": win_update.win_update,
@@ -95,24 +92,24 @@ functions_mapping = {
 }
 
 # Style:
+checkboxes = {}
 for function_name, func in functions_mapping.items():
+    checkbox_var = tk.BooleanVar(value=False)
+    checkboxes[function_name] = checkbox_var
+
     button_frame = tk.Frame(function_buttons_frame)
     button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
-    button = tk.Button(button_frame, text=function_name, command=lambda f=func: run_function(f))
-    button.pack(side=tk.LEFT)
+    checkbox = tk.Checkbutton(button_frame, text=function_name, variable=checkbox_var, onvalue=True, offvalue=False)
+    checkbox.pack(side=tk.LEFT)
 
     bg_color = "#292929"
     fg_color = "#A9A9A9"
-    button.configure(bg=bg_color, fg=fg_color)
+    checkbox.configure(bg=bg_color, fg=fg_color)
 
 # Update the canvas scroll region after adding widgets
 function_buttons_frame.update_idletasks()
 canvas.configure(scrollregion=canvas.bbox("all"))
-
-# Style: Custom Script Icon
-icon_path = "icon.ico"
-root.iconbitmap(default=icon_path)
 
 # Bottom buttons
 all_functions_button = tk.Button(root, text="Run all", command=lambda: run_selected_functions(functions_mapping.keys()))
@@ -120,6 +117,18 @@ all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
 stop_all_functions_button = tk.Button(root, text="Stop all", command=stop_all_functions)
 stop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+
+# Button to run only selected functions
+def run_selected_functions(selected_functions):
+    for func_name in selected_functions:
+        func = functions_mapping.get(func_name)
+        if func:
+            run_function(func)
+            root.update()  # Update the GUI to keep it responsive
+
+run_selected_functions_button = tk.Button(root, text="Run Selected Functions", command=lambda: run_selected_functions([func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]))
+run_selected_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+
 
 # Bottom, Style: Output Text Widget
 output_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg="#292929", fg="#A9A9A9")
@@ -135,7 +144,7 @@ def run_function(func):
         print(f"Error running function {func.__name__}: {e}")
     finally:
         if not stop_event.is_set():  # Add condition to check if the function was stopped
-            print("Pauza 0.5s...")
+            print("Pause 0.5s...")
             time.sleep(0.5)  # 0.5 second pause
         output_text.see(tk.END)
 
@@ -152,7 +161,7 @@ sys.stdout = StdoutRedirector(output_text)
 update_colors()
 
 try:
-    root.mainloop()
+  root.mainloop()
 except KeyboardInterrupt:
     print("Quitting... by keyboard interrupt")
     sys.exit()
