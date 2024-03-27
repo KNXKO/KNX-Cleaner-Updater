@@ -27,7 +27,7 @@ def stop_all_functions():
     stop_event.set()
     print("All functions execution stopped.")
 
-# Function to display the output of the functions in the output text widget
+# Run function
 def run_function(func):
     try:
         func()  # Call the function directly without extra output
@@ -41,7 +41,7 @@ def run_function(func):
             time.sleep(0.5)  # 0.5 second pause
         output_text.see(tk.END)
 
-# Start all functions sequentially with a pause between each
+# Start all functions
 def run_all_functions(functions_to_run):
     for func_name in functions_to_run:
         func = functions_mapping.get(func_name)
@@ -49,7 +49,7 @@ def run_all_functions(functions_to_run):
             run_function(func)
             root.update()
 
-# Button to run only selected functions
+# Run selected functions
 def run_selected_functions(selected_functions):
     for func_name in selected_functions:
         func = functions_mapping.get(func_name)
@@ -74,26 +74,6 @@ def update_colors():
     all_functions_button.configure(bg=bg_color, fg=fg_color)
     stop_all_functions_button.configure(bg=bg_color, fg=fg_color)
 
-# Create canvas with background color
-canvas = tk.Canvas(root, bg=bg_color, width=250, height=400, highlightthickness=0)
-canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
-
-# Create function buttons frame
-function_buttons_frame = tk.Frame(canvas, bg=bg_color)
-
-# Add a scrollbar to the canvas
-scrollbar = ctk.CTkScrollbar(root, command=canvas.yview,)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-# Configure canvas and scrollbar
-canvas.configure(yscrollcommand=scrollbar.set)
-canvas.create_window((0, 0), window=function_buttons_frame, anchor=tk.NW)
-
-# Function to scroll the canvas with the mouse wheel
-def on_canvas_mouse_wheel(event):
-    canvas.yview_scroll(-1*(event.delta//120), "units")
-canvas.bind_all("<MouseWheel>", on_canvas_mouse_wheel)
-
 # Functions with Text properties
 functions_mapping = {
     "Run Disk Cleanup": disk_cleanup.run_disk_cleanup,
@@ -116,7 +96,24 @@ functions_mapping = {
     "Open CCleaner": ccleaner.open_ccleaner,
 }
 
-# Style:
+canvas = tk.Canvas(root, bg=bg_color, width=250, height=400, highlightthickness=0)
+canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+
+# Functions buttons
+function_buttons_frame = tk.Frame(canvas, bg=bg_color)
+
+# Scrollbar functionality
+scrollbar = ctk.CTkScrollbar(root, command=canvas.yview,)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+# Configure canvas and scrollbar
+canvas.configure(yscrollcommand=scrollbar.set)
+canvas.create_window((0, 0), window=function_buttons_frame, anchor=tk.NW)
+# Function to scroll the canvas with the mouse wheel
+def on_canvas_mouse_wheel(event):
+    canvas.yview_scroll(-1*(event.delta//120), "units")
+canvas.bind_all("<MouseWheel>", on_canvas_mouse_wheel)
+
+# Checkboxes for functions buttons
 checkboxes = {}
 for function_name, func in functions_mapping.items():
     checkbox_var = tk.BooleanVar(value=False)
@@ -134,7 +131,7 @@ for function_name, func in functions_mapping.items():
 function_buttons_frame.update_idletasks()
 canvas.configure(scrollregion=canvas.bbox("all"))
 
-# Bottom buttons
+# Run all, stop all, run selected buttons
 all_functions_button = tk.Button(root, text="Run all", command=lambda: run_all_functions(functions_mapping.keys()))
 all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
