@@ -56,6 +56,10 @@ def run_selected_functions(selected_functions):
         if func:
             run_function(func)
             root.update()  # Update the GUI to keep it responsive
+            # Odznačenie zaškrtnutého checkboxu po spustení funkcie
+            checkbox_var = checkboxes.get(func_name)
+            if checkbox_var:
+                checkbox_var.set(False)
 
 def update_colors():
     root.config(bg=bg_color)
