@@ -8,3 +8,4 @@ build/
 *.spec
 ShowWindowTitles.py
 *.json
+.vscode/

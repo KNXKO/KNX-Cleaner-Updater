@@ -547,7 +547,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "label = ctk.CTkLabel(root, text=\"KNX Cleaner & Updater\", font=(\"Roboto\",13, \"bold\"))\nbg_color = \"#292929\"\nfg_color = \"#A9A9A9\"\nset_color = \"#161616\"\ngreen_color = \"#33691E\"\nred_color = \"#441A19\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()",
+        "peekOfCode": "label = ctk.CTkLabel(root, text=\"KNX Cleaner & Updater\", font=(\"Roboto\",13, \"bold\"))\nbg_color = \"#292929\"\nfg_color = \"#A9A9A9\"\nset_color = \"#161616\"\nset_color_hover = \"#2F2F2F\"\ngreen_color = \"#33691E\"\nred_color = \"#441A19\"\nred_color_hover = \"#692827\"\nlabel.pack()\n# ******************** FUNCTIONS ********************",
         "detail": "main",
         "documentation": {}
     },
@@ -556,7 +556,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "bg_color = \"#292929\"\nfg_color = \"#A9A9A9\"\nset_color = \"#161616\"\ngreen_color = \"#33691E\"\nred_color = \"#441A19\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions",
+        "peekOfCode": "bg_color = \"#292929\"\nfg_color = \"#A9A9A9\"\nset_color = \"#161616\"\nset_color_hover = \"#2F2F2F\"\ngreen_color = \"#33691E\"\nred_color = \"#441A19\"\nred_color_hover = \"#692827\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable",
         "detail": "main",
         "documentation": {}
     },
@@ -565,7 +565,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "fg_color = \"#A9A9A9\"\nset_color = \"#161616\"\ngreen_color = \"#33691E\"\nred_color = \"#441A19\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions\ndef stop_all_functions():",
+        "peekOfCode": "fg_color = \"#A9A9A9\"\nset_color = \"#161616\"\nset_color_hover = \"#2F2F2F\"\ngreen_color = \"#33691E\"\nred_color = \"#441A19\"\nred_color_hover = \"#692827\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()",
         "detail": "main",
         "documentation": {}
     },
@@ -574,7 +574,16 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "set_color = \"#161616\"\ngreen_color = \"#33691E\"\nred_color = \"#441A19\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions\ndef stop_all_functions():\n    stop_event.set()",
+        "peekOfCode": "set_color = \"#161616\"\nset_color_hover = \"#2F2F2F\"\ngreen_color = \"#33691E\"\nred_color = \"#441A19\"\nred_color_hover = \"#692827\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "set_color_hover",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "set_color_hover = \"#2F2F2F\"\ngreen_color = \"#33691E\"\nred_color = \"#441A19\"\nred_color_hover = \"#692827\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions\ndef stop_all_functions():",
         "detail": "main",
         "documentation": {}
     },
@@ -583,7 +592,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "green_color = \"#33691E\"\nred_color = \"#441A19\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions\ndef stop_all_functions():\n    stop_event.set()\n    print(\"All functions execution stopped.\")",
+        "peekOfCode": "green_color = \"#33691E\"\nred_color = \"#441A19\"\nred_color_hover = \"#692827\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions\ndef stop_all_functions():\n    stop_event.set()",
         "detail": "main",
         "documentation": {}
     },
@@ -592,7 +601,16 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "red_color = \"#441A19\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions\ndef stop_all_functions():\n    stop_event.set()\n    print(\"All functions execution stopped.\")\n# Run single function",
+        "peekOfCode": "red_color = \"#441A19\"\nred_color_hover = \"#692827\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions\ndef stop_all_functions():\n    stop_event.set()\n    print(\"All functions execution stopped.\")",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "red_color_hover",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "red_color_hover = \"#692827\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions\ndef stop_all_functions():\n    stop_event.set()\n    print(\"All functions execution stopped.\")\n# Run single function",
         "detail": "main",
         "documentation": {}
     },
@@ -655,7 +673,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "run_selected_functions_button = ctk.CTkButton(root, text=\"Run Selected\", command=lambda: run_selected_functions([func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]), fg_color=set_color)\nrun_selected_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\nall_functions_button = ctk.CTkButton(root, text=\"Run All\", command=lambda: run_all_functions(functions_mapping.keys()), fg_color=set_color, hover_color=green_color)\nall_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\nstop_all_functions_button = ctk.CTkButton(root, text=\"Stop All\", command=stop_all_functions, fg_color=red_color, hover_color=red_color)\nstop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\n# Bottom, Style: Output Text Widget\noutput_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg=bg_color, fg=fg_color)\noutput_text.pack(pady=10)\n# ******************** RUN ********************",
+        "peekOfCode": "run_selected_functions_button = ctk.CTkButton(root, text=\"Run Selected\", command=lambda: run_selected_functions([func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]), fg_color=set_color, hover_color=set_color_hover)\nrun_selected_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\nall_functions_button = ctk.CTkButton(root, text=\"Run All\", command=lambda: run_all_functions(functions_mapping.keys()), fg_color=set_color, hover_color=set_color_hover)\nall_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\nstop_all_functions_button = ctk.CTkButton(root, text=\"Stop All\", command=stop_all_functions, fg_color=red_color, hover_color=red_color_hover)\nstop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\n# Bottom, Style: Output Text Widget\noutput_text = ctk.CTkTextbox(root, width=250, height=200, wrap=tk.WORD)\noutput_text.pack(pady=10)\n# ******************** RUN ********************",
         "detail": "main",
         "documentation": {}
     },
@@ -664,7 +682,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "all_functions_button = ctk.CTkButton(root, text=\"Run All\", command=lambda: run_all_functions(functions_mapping.keys()), fg_color=set_color, hover_color=green_color)\nall_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\nstop_all_functions_button = ctk.CTkButton(root, text=\"Stop All\", command=stop_all_functions, fg_color=red_color, hover_color=red_color)\nstop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\n# Bottom, Style: Output Text Widget\noutput_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg=bg_color, fg=fg_color)\noutput_text.pack(pady=10)\n# ******************** RUN ********************\n# Output Text - Redirect stdout to the output text widget\nclass StdoutRedirector:",
+        "peekOfCode": "all_functions_button = ctk.CTkButton(root, text=\"Run All\", command=lambda: run_all_functions(functions_mapping.keys()), fg_color=set_color, hover_color=set_color_hover)\nall_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\nstop_all_functions_button = ctk.CTkButton(root, text=\"Stop All\", command=stop_all_functions, fg_color=red_color, hover_color=red_color_hover)\nstop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\n# Bottom, Style: Output Text Widget\noutput_text = ctk.CTkTextbox(root, width=250, height=200, wrap=tk.WORD)\noutput_text.pack(pady=10)\n# ******************** RUN ********************\n# Output Text - Redirect stdout to the output text widget\nclass StdoutRedirector:",
         "detail": "main",
         "documentation": {}
     },
@@ -673,7 +691,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "stop_all_functions_button = ctk.CTkButton(root, text=\"Stop All\", command=stop_all_functions, fg_color=red_color, hover_color=red_color)\nstop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\n# Bottom, Style: Output Text Widget\noutput_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg=bg_color, fg=fg_color)\noutput_text.pack(pady=10)\n# ******************** RUN ********************\n# Output Text - Redirect stdout to the output text widget\nclass StdoutRedirector:\n    def __init__(self, widget):\n        self.widget = widget",
+        "peekOfCode": "stop_all_functions_button = ctk.CTkButton(root, text=\"Stop All\", command=stop_all_functions, fg_color=red_color, hover_color=red_color_hover)\nstop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\n# Bottom, Style: Output Text Widget\noutput_text = ctk.CTkTextbox(root, width=250, height=200, wrap=tk.WORD)\noutput_text.pack(pady=10)\n# ******************** RUN ********************\n# Output Text - Redirect stdout to the output text widget\nclass StdoutRedirector:\n    def __init__(self, widget):\n        self.widget = widget",
         "detail": "main",
         "documentation": {}
     },
@@ -682,7 +700,7 @@
         "kind": 5,
         "importPath": "main",
         "description": "main",
-        "peekOfCode": "output_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg=bg_color, fg=fg_color)\noutput_text.pack(pady=10)\n# ******************** RUN ********************\n# Output Text - Redirect stdout to the output text widget\nclass StdoutRedirector:\n    def __init__(self, widget):\n        self.widget = widget\n    def write(self, text):\n        self.widget.insert(tk.END, text)\n        self.widget.see(tk.END)  # Scroll to the bottom",
+        "peekOfCode": "output_text = ctk.CTkTextbox(root, width=250, height=200, wrap=tk.WORD)\noutput_text.pack(pady=10)\n# ******************** RUN ********************\n# Output Text - Redirect stdout to the output text widget\nclass StdoutRedirector:\n    def __init__(self, widget):\n        self.widget = widget\n    def write(self, text):\n        self.widget.insert(tk.END, text)\n        self.widget.see(tk.END)  # Scroll to the bottom",
         "detail": "main",
         "documentation": {}
     },

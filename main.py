@@ -19,8 +19,10 @@ label = ctk.CTkLabel(root, text="KNX Cleaner & Updater", font=("Roboto",13, "bol
 bg_color = "#292929"
 fg_color = "#A9A9A9"
 set_color = "#161616"
+set_color_hover = "#2F2F2F"
 green_color = "#33691E"
 red_color = "#441A19"
+red_color_hover = "#692827"
 label.pack()
 
 # ******************** FUNCTIONS ********************
@@ -130,17 +132,17 @@ function_buttons_frame.update_idletasks()
 canvas.configure(scrollregion=canvas.bbox("all"))
 
 # Run all, stop all, run selected buttons
-run_selected_functions_button = ctk.CTkButton(root, text="Run Selected", command=lambda: run_selected_functions([func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]), fg_color=set_color)
+run_selected_functions_button = ctk.CTkButton(root, text="Run Selected", command=lambda: run_selected_functions([func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]), fg_color=set_color, hover_color=set_color_hover)
 run_selected_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
-all_functions_button = ctk.CTkButton(root, text="Run All", command=lambda: run_all_functions(functions_mapping.keys()), fg_color=set_color, hover_color=green_color)
+all_functions_button = ctk.CTkButton(root, text="Run All", command=lambda: run_all_functions(functions_mapping.keys()), fg_color=set_color, hover_color=set_color_hover)
 all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
-stop_all_functions_button = ctk.CTkButton(root, text="Stop All", command=stop_all_functions, fg_color=red_color, hover_color=red_color)
+stop_all_functions_button = ctk.CTkButton(root, text="Stop All", command=stop_all_functions, fg_color=red_color, hover_color=red_color_hover)
 stop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
 # Bottom, Style: Output Text Widget
-output_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg=bg_color, fg=fg_color)
+output_text = ctk.CTkTextbox(root, width=250, height=200, wrap=tk.WORD)
 output_text.pack(pady=10)
 
 # ******************** RUN ********************
