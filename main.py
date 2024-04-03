@@ -1,6 +1,5 @@
 import threading
 import tkinter as tk
-from tkinter import scrolledtext
 import customtkinter as ctk
 import sys
 import time
@@ -10,18 +9,20 @@ from functions import disk_cleanup, prefetch, win_update, ms_store_update, \
 
 # GUI: Title, Window, Font, Icon
 root = ctk.CTk()
+root.geometry("550x500")
 ctk.set_appearance_mode("dark")
 root.title("KNX Cleaner & Updater")
 root.resizable(False,False)
-root.option_add("*Font", "Roboto 10",)  # Change font size globally
 root.iconbitmap("icon.ico")
-label = ctk.CTkLabel(root, text="KNX Cleaner & Updater", font=("Roboto",13, "bold"))
+font=ctk.CTkFont(family='Centaur', size=17)
+label = ctk.CTkLabel(root, text="KNX Cleaner & Updater", font=font)
 label.pack()
+
 # Define color constants
-bg_color = "#292929"
-fg_color = "#A9A9A9"
-set_color = "#161616"
-set_color_hover = "#2F2F2F"
+bg_color = "#242424"
+text_color = "#A9A9A9"
+button_color = "#161616"
+button_color_hover = "#2F2F2F"
 green_color = "#33691E"
 red_color = "#441A19"
 red_color_hover = "#692827"
@@ -91,15 +92,14 @@ functions_mapping = {
 }
 
 # ******************** GUI ********************
-canvas = ctk.CTkCanvas(root, width=220, height=400, highlightthickness=0)
+canvas = ctk.CTkCanvas(root, width=250, height=400, highlightthickness=0, bg=bg_color)
 canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
 # Functions buttons
-function_buttons_frame = ctk.CTkFrame(canvas, bg_color=bg_color)
-
+function_buttons_frame = ctk.CTkCanvas(canvas,highlightthickness=0, bg=bg_color)
 
 # Scrollbar functionality
-scrollbar = ctk.CTkScrollbar(root, command=canvas.yview,)
+scrollbar = ctk.CTkScrollbar(root, command=canvas.yview)
 scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 # Configure canvas and scrollbar
 canvas.configure(yscrollcommand=scrollbar.set)
@@ -116,9 +116,9 @@ for function_name, func in functions_mapping.items():
     checkboxes[function_name] = checkbox_var
 
     button_frame = ctk.CTkFrame(function_buttons_frame)
-    button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=3)
+    button_frame.pack(side=tk.TOP, fill=tk.X, pady=4)
 
-    checkbox = ctk.CTkCheckBox(button_frame, text=function_name, variable=checkbox_var, onvalue=True, offvalue=False, border_width=2, checkbox_width=20, checkbox_height=20, hover_color=fg_color, fg_color=(fg_color, set_color), font=("Roboto", 14,))
+    checkbox = ctk.CTkCheckBox(button_frame, text=function_name, variable=checkbox_var, onvalue=True,font=font,offvalue=False, border_width=2, checkbox_width=20, checkbox_height=20, hover_color=text_color, fg_color=(text_color, button_color))
     checkbox.pack(side=tk.LEFT)
 
 # Update the canvas scroll region after adding widgets
@@ -126,17 +126,17 @@ function_buttons_frame.update_idletasks()
 canvas.configure(scrollregion=canvas.bbox("all"))
 
 # Run all, stop all, run selected buttons
-run_selected_functions_button = ctk.CTkButton(root, text="Run Selected", command=lambda: run_selected_functions([func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]), fg_color=set_color, hover_color=set_color_hover)
+run_selected_functions_button = ctk.CTkButton(root, text="Run Selected", command=lambda: run_selected_functions([func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]), fg_color=button_color, hover_color=button_color_hover, font=font)
 run_selected_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
-all_functions_button = ctk.CTkButton(root, text="Run All", command=lambda: run_all_functions(functions_mapping.keys()), fg_color=set_color, hover_color=set_color_hover)
+all_functions_button = ctk.CTkButton(root, text="Run All", command=lambda: run_all_functions(functions_mapping.keys()), fg_color=button_color, hover_color=button_color_hover, font=font)
 all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
-stop_all_functions_button = ctk.CTkButton(root, text="Stop All", command=stop_all_functions, fg_color=red_color, hover_color=red_color_hover)
+stop_all_functions_button = ctk.CTkButton(root, text="Stop All", command=stop_all_functions, fg_color=red_color, hover_color=red_color_hover, font=font)
 stop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
-# Bottom, Style: Output Text Widget
-output_text = ctk.CTkTextbox(root, width=250, height=200, wrap=tk.WORD)
+# Output Text Widget
+output_text = ctk.CTkTextbox(root, width=250, height=200, wrap=tk.WORD, font=font, fg_color=button_color)
 output_text.pack(pady=10)
 
 # ******************** RUN ********************
@@ -149,7 +149,7 @@ class StdoutRedirector:
         self.widget.insert(tk.END, text)
         self.widget.see(tk.END)  # Scroll to the bottom
 sys.stdout = StdoutRedirector(output_text)
-print("Console:")
+print("====== CONSOLE ======")
 
 try:
     root.mainloop()
