@@ -152,7 +152,7 @@ sys.stdout = StdoutRedirector(output_text)
 print("Console:")
 
 try:
-  root.mainloop()
+    root.mainloop()
 except KeyboardInterrupt:
     print("Quitting... by keyboard interrupt")
     sys.exit()
