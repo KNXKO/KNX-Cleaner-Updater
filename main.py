@@ -16,6 +16,8 @@ root.resizable(False,False)
 root.option_add("*Font", "Roboto 10",)  # Change font size globally
 root.iconbitmap("icon.ico")
 label = ctk.CTkLabel(root, text="KNX Cleaner & Updater", font=("Roboto",13, "bold"))
+label.pack()
+# Define color constants
 bg_color = "#292929"
 fg_color = "#A9A9A9"
 set_color = "#161616"
@@ -23,8 +25,6 @@ set_color_hover = "#2F2F2F"
 green_color = "#33691E"
 red_color = "#441A19"
 red_color_hover = "#692827"
-label.pack()
-
 # ******************** FUNCTIONS ********************
 
 # Define stop_event as a global variable
@@ -63,17 +63,10 @@ def run_selected_functions(selected_functions):
         func = functions_mapping.get(func_name)
         if func:
             run_function(func)
-            root.update()  # Update the GUI to keep it responsive
-            # Odznačenie zaškrtnutého checkboxu po spustení funkcie
+            root.update()
             checkbox_var = checkboxes.get(func_name)
             if checkbox_var:
                 checkbox_var.set(False)
-
-# Update the GUI colors to dark
-def update_colors():
-    for button_frame in function_buttons_frame.winfo_children():
-        button_frame.configure(bg=bg_color)
-
 
 # Functions with Text
 functions_mapping = {
@@ -98,11 +91,12 @@ functions_mapping = {
 }
 
 # ******************** GUI ********************
-canvas = ctk.CTkCanvas(root, bg=bg_color, width=250, height=400, highlightthickness=0)
+canvas = ctk.CTkCanvas(root, width=220, height=400, highlightthickness=0)
 canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
 # Functions buttons
-function_buttons_frame = ctk.CTkFrame(canvas, bg_color=bg_color, fg_color=bg_color)
+function_buttons_frame = ctk.CTkFrame(canvas, bg_color=bg_color)
+
 
 # Scrollbar functionality
 scrollbar = ctk.CTkScrollbar(root, command=canvas.yview,)
@@ -121,8 +115,8 @@ for function_name, func in functions_mapping.items():
     checkbox_var = tk.BooleanVar(value=False)
     checkboxes[function_name] = checkbox_var
 
-    button_frame = tk.Frame(function_buttons_frame)
-    button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=4)
+    button_frame = ctk.CTkFrame(function_buttons_frame)
+    button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=3)
 
     checkbox = ctk.CTkCheckBox(button_frame, text=function_name, variable=checkbox_var, onvalue=True, offvalue=False, border_width=2, checkbox_width=20, checkbox_height=20, hover_color=fg_color, fg_color=(fg_color, set_color), font=("Roboto", 14,))
     checkbox.pack(side=tk.LEFT)
@@ -155,9 +149,9 @@ class StdoutRedirector:
         self.widget.insert(tk.END, text)
         self.widget.see(tk.END)  # Scroll to the bottom
 sys.stdout = StdoutRedirector(output_text)
+print("Console:")
 
 try:
-  update_colors()
   root.mainloop()
 except KeyboardInterrupt:
     print("Quitting... by keyboard interrupt")
