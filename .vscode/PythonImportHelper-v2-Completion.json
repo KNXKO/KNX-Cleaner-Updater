@@ -1,0 +1,707 @@
+[
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "time",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "time",
+        "description": "time",
+        "detail": "time",
+        "documentation": {}
+    },
+    {
+        "label": "pyautogui",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pyautogui",
+        "description": "pyautogui",
+        "detail": "pyautogui",
+        "documentation": {}
+    },
+    {
+        "label": "webbrowser",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "webbrowser",
+        "description": "webbrowser",
+        "detail": "webbrowser",
+        "documentation": {}
+    },
+    {
+        "label": "pygetwindow",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pygetwindow",
+        "description": "pygetwindow",
+        "detail": "pygetwindow",
+        "documentation": {}
+    },
+    {
+        "label": "threading",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "threading",
+        "description": "threading",
+        "detail": "threading",
+        "documentation": {}
+    },
+    {
+        "label": "tkinter",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "scrolledtext",
+        "importPath": "tkinter",
+        "description": "tkinter",
+        "isExtraImport": true,
+        "detail": "tkinter",
+        "documentation": {}
+    },
+    {
+        "label": "customtkinter",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "customtkinter",
+        "description": "customtkinter",
+        "detail": "customtkinter",
+        "documentation": {}
+    },
+    {
+        "label": "sys",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "sys",
+        "description": "sys",
+        "detail": "sys",
+        "documentation": {}
+    },
+    {
+        "label": "disk_cleanup",
+        "importPath": "functions",
+        "description": "functions",
+        "isExtraImport": true,
+        "detail": "functions",
+        "documentation": {}
+    },
+    {
+        "label": "prefetch",
+        "importPath": "functions",
+        "description": "functions",
+        "isExtraImport": true,
+        "detail": "functions",
+        "documentation": {}
+    },
+    {
+        "label": "win_update",
+        "importPath": "functions",
+        "description": "functions",
+        "isExtraImport": true,
+        "detail": "functions",
+        "documentation": {}
+    },
+    {
+        "label": "ms_store_update",
+        "importPath": "functions",
+        "description": "functions",
+        "isExtraImport": true,
+        "detail": "functions",
+        "documentation": {}
+    },
+    {
+        "label": "\\",
+        "importPath": "functions",
+        "description": "functions",
+        "isExtraImport": true,
+        "detail": "functions",
+        "documentation": {}
+    },
+    {
+        "label": "open_adobe",
+        "kind": 2,
+        "importPath": "functions.adobe",
+        "description": "functions.adobe",
+        "peekOfCode": "def open_adobe():\n    try:\n        os.startfile(adobe_path)\n        print(\"Opened Adobe Creative Cloud\")\n    except Exception as e:\n        print(\"Error opening Adobe Creative Cloud:\", str(e))",
+        "detail": "functions.adobe",
+        "documentation": {}
+    },
+    {
+        "label": "adobe_path",
+        "kind": 5,
+        "importPath": "functions.adobe",
+        "description": "functions.adobe",
+        "peekOfCode": "adobe_path = r'AssetsScripts\\Adobe Creative Cloud.lnk'\ndef open_adobe():\n    try:\n        os.startfile(adobe_path)\n        print(\"Opened Adobe Creative Cloud\")\n    except Exception as e:\n        print(\"Error opening Adobe Creative Cloud:\", str(e))",
+        "detail": "functions.adobe",
+        "documentation": {}
+    },
+    {
+        "label": "run_bcdedit",
+        "kind": 2,
+        "importPath": "functions.bcdedit_optimizer",
+        "description": "functions.bcdedit_optimizer",
+        "peekOfCode": "def run_bcdedit():\n    try:\n        os.startfile(bcdedit_path)\n        print(\"Opened Bcdedit Optimizer Script\")\n    except Exception as e:\n        print(\"Error opening Bcdedit Optimizer Script:\", str(e))",
+        "detail": "functions.bcdedit_optimizer",
+        "documentation": {}
+    },
+    {
+        "label": "bcdedit_path",
+        "kind": 5,
+        "importPath": "functions.bcdedit_optimizer",
+        "description": "functions.bcdedit_optimizer",
+        "peekOfCode": "bcdedit_path = r'AssetsScripts\\Bcdedit Optimizer.cmd'\ndef run_bcdedit():\n    try:\n        os.startfile(bcdedit_path)\n        print(\"Opened Bcdedit Optimizer Script\")\n    except Exception as e:\n        print(\"Error opening Bcdedit Optimizer Script:\", str(e))",
+        "detail": "functions.bcdedit_optimizer",
+        "documentation": {}
+    },
+    {
+        "label": "open_ccleaner",
+        "kind": 2,
+        "importPath": "functions.ccleaner",
+        "description": "functions.ccleaner",
+        "peekOfCode": "def open_ccleaner():\n    try:\n        os.startfile(ccleaner_path)\n        print(\"Opened CCleaner\")\n    except Exception as e:\n        print(\"Error opening CCleaner:\", str(e))",
+        "detail": "functions.ccleaner",
+        "documentation": {}
+    },
+    {
+        "label": "ccleaner_path",
+        "kind": 5,
+        "importPath": "functions.ccleaner",
+        "description": "functions.ccleaner",
+        "peekOfCode": "ccleaner_path = 'AssetsScripts\\CCleaner64.exe'\ndef open_ccleaner():\n    try:\n        os.startfile(ccleaner_path)\n        print(\"Opened CCleaner\")\n    except Exception as e:\n        print(\"Error opening CCleaner:\", str(e))",
+        "detail": "functions.ccleaner",
+        "documentation": {}
+    },
+    {
+        "label": "close_apps",
+        "kind": 2,
+        "importPath": "functions.close_apps",
+        "description": "functions.close_apps",
+        "peekOfCode": "def close_apps():\n    try:\n        subprocess.Popen('taskkill /F /IM Spotify.exe', shell=True)\n        print(\"Spotify closed\")\n    except Exception as e:\n        print(\"An error occurred while closing Spotify:\", str(e))\n'''\n    try:\n        subprocess.Popen('taskkill /F /IM thorium.exe', shell=True)  # Ukážeme príklad pre Chrome, ale môžete zmeniť na svoj prehliadač\n        print(\"Browser closed\")",
+        "detail": "functions.close_apps",
+        "documentation": {}
+    },
+    {
+        "label": "defrag",
+        "kind": 2,
+        "importPath": "functions.defrag",
+        "description": "functions.defrag",
+        "peekOfCode": "def defrag():\n    try:\n        subprocess.Popen('dfrgui.exe')\n        print(\"Opened Disk Defragmenter\")\n    except Exception as e:\n        print(\"Error opening Disk Defragmenter:\", str(e))",
+        "detail": "functions.defrag",
+        "documentation": {}
+    },
+    {
+        "label": "run_disk_cleanup",
+        "kind": 2,
+        "importPath": "functions.disk_cleanup",
+        "description": "functions.disk_cleanup",
+        "peekOfCode": "def run_disk_cleanup():\n        try:\n            subprocess.Popen('cleanmgr.exe')\n            time.sleep(1) # Wait for the window to open\n            pyautogui.press('enter')\n            print(\"Opened Disk Cleanup Tool\")\n        except Exception as e:\n            print(\"Error opening Disk Cleanup Tool:\", str(e))",
+        "detail": "functions.disk_cleanup",
+        "documentation": {}
+    },
+    {
+        "label": "open_drivers_link",
+        "kind": 2,
+        "importPath": "functions.drivers_link",
+        "description": "functions.drivers_link",
+        "peekOfCode": "def open_drivers_link():\n    try:\n        webbrowser.open(link1)\n        webbrowser.open_new_tab(link2)\n        print(\"Opened web browser with links\")\n    except Exception as e:\n        print(\"Error opening web browser with links:\", str(e))",
+        "detail": "functions.drivers_link",
+        "documentation": {}
+    },
+    {
+        "label": "link1",
+        "kind": 5,
+        "importPath": "functions.drivers_link",
+        "description": "functions.drivers_link",
+        "peekOfCode": "link1 = 'https://rog.asus.com/motherboards/rog-strix/rog-strix-b550-f-gaming-model/helpdesk_download/'\nlink2 = 'https://www.amd.com/en/support/chipsets/amd-socket-am4/b550'\ndef open_drivers_link():\n    try:\n        webbrowser.open(link1)\n        webbrowser.open_new_tab(link2)\n        print(\"Opened web browser with links\")\n    except Exception as e:\n        print(\"Error opening web browser with links:\", str(e))",
+        "detail": "functions.drivers_link",
+        "documentation": {}
+    },
+    {
+        "label": "link2",
+        "kind": 5,
+        "importPath": "functions.drivers_link",
+        "description": "functions.drivers_link",
+        "peekOfCode": "link2 = 'https://www.amd.com/en/support/chipsets/amd-socket-am4/b550'\ndef open_drivers_link():\n    try:\n        webbrowser.open(link1)\n        webbrowser.open_new_tab(link2)\n        print(\"Opened web browser with links\")\n    except Exception as e:\n        print(\"Error opening web browser with links:\", str(e))",
+        "detail": "functions.drivers_link",
+        "documentation": {}
+    },
+    {
+        "label": "flush_dns",
+        "kind": 2,
+        "importPath": "functions.ipconfig",
+        "description": "functions.ipconfig",
+        "peekOfCode": "def flush_dns():\n    try:\n        # Spustenie externeho cmd okna a vykonanie prikazu ipconfig /flushdns\n        subprocess.run(\"cmd /c ipconfig /flushdns\", shell=True)\n        print(\"DNS cache bol úspešne vyčistený.\")\n    except Exception as e:\n        print(f\"Chyba pri vykonávaní príkazu ipconfig /flushdns: {e}\")",
+        "detail": "functions.ipconfig",
+        "documentation": {}
+    },
+    {
+        "label": "learix_fps",
+        "kind": 2,
+        "importPath": "functions.learix_fps",
+        "description": "functions.learix_fps",
+        "peekOfCode": "def learix_fps():\n    try:\n        os.startfile(learix_path)\n        # Čakanie na zobrazenie okna s názvom \"Administrator:  Learix FPS 2.0\" do 5 sekúnd\n        timeout = time.time() + 5  # Nastavenie maximálneho času čakania na 5 sekúnd\n        while True:\n            active_window = gw.getWindowsWithTitle(\"Administrator:  Learix FPS 2.0\")\n            if active_window:  # Ak sme našli okno\n                active_window = active_window[0]\n                break",
+        "detail": "functions.learix_fps",
+        "documentation": {}
+    },
+    {
+        "label": "learix_path",
+        "kind": 5,
+        "importPath": "functions.learix_fps",
+        "description": "functions.learix_fps",
+        "peekOfCode": "learix_path = r'AssetsScripts\\Learix FPS.bat'\ndef learix_fps():\n    try:\n        os.startfile(learix_path)\n        # Čakanie na zobrazenie okna s názvom \"Administrator:  Learix FPS 2.0\" do 5 sekúnd\n        timeout = time.time() + 5  # Nastavenie maximálneho času čakania na 5 sekúnd\n        while True:\n            active_window = gw.getWindowsWithTitle(\"Administrator:  Learix FPS 2.0\")\n            if active_window:  # Ak sme našli okno\n                active_window = active_window[0]",
+        "detail": "functions.learix_fps",
+        "documentation": {}
+    },
+    {
+        "label": "run_logfiles",
+        "kind": 2,
+        "importPath": "functions.log_files",
+        "description": "functions.log_files",
+        "peekOfCode": "def run_logfiles():\n    try:\n        os.startfile(logfiles_path)\n        print(\"Opened Log Folder\")\n    except Exception as e:\n        print(\"Error opening Log Files Cleaner Script:\", str(e))",
+        "detail": "functions.log_files",
+        "documentation": {}
+    },
+    {
+        "label": "logfiles_path",
+        "kind": 5,
+        "importPath": "functions.log_files",
+        "description": "functions.log_files",
+        "peekOfCode": "logfiles_path = r'AssetsScripts\\Log Files Cleaner.bat'\ndef run_logfiles():\n    try:\n        os.startfile(logfiles_path)\n        print(\"Opened Log Folder\")\n    except Exception as e:\n        print(\"Error opening Log Files Cleaner Script:\", str(e))",
+        "detail": "functions.log_files",
+        "documentation": {}
+    },
+    {
+        "label": "ms_store_update",
+        "kind": 2,
+        "importPath": "functions.ms_store_update",
+        "description": "functions.ms_store_update",
+        "peekOfCode": "def ms_store_update():\n    try:\n        os.system(\"start ms-windows-store:home\")\n        print(\"Opened Microsoft Store\")\n    except Exception as e:\n        print(\"Error opening Microsoft Store:\", str(e))",
+        "detail": "functions.ms_store_update",
+        "documentation": {}
+    },
+    {
+        "label": "open_nvidia",
+        "kind": 2,
+        "importPath": "functions.nvidia",
+        "description": "functions.nvidia",
+        "peekOfCode": "def open_nvidia():\n    try:\n        os.startfile(nvidia_path)\n        print(\"Opened Nvidia App\")\n    except Exception as e:\n        print(\"Error opening Nvidia App:\", str(e))",
+        "detail": "functions.nvidia",
+        "documentation": {}
+    },
+    {
+        "label": "nvidia_path",
+        "kind": 5,
+        "importPath": "functions.nvidia",
+        "description": "functions.nvidia",
+        "peekOfCode": "nvidia_path = r'AssetsScripts\\NVIDIA.lnk'\ndef open_nvidia():\n    try:\n        os.startfile(nvidia_path)\n        print(\"Opened Nvidia App\")\n    except Exception as e:\n        print(\"Error opening Nvidia App:\", str(e))",
+        "detail": "functions.nvidia",
+        "documentation": {}
+    },
+    {
+        "label": "open_prefetch",
+        "kind": 2,
+        "importPath": "functions.prefetch",
+        "description": "functions.prefetch",
+        "peekOfCode": "def open_prefetch():\n    try:\n        os.startfile(prefetch_path)\n        print(\"Opened Prefetch Folder\")\n    except Exception as e:\n        print(\"Error opening Prefetch Folder:\", str(e))",
+        "detail": "functions.prefetch",
+        "documentation": {}
+    },
+    {
+        "label": "prefetch_path",
+        "kind": 5,
+        "importPath": "functions.prefetch",
+        "description": "functions.prefetch",
+        "peekOfCode": "prefetch_path = r'C:\\Windows\\Prefetch'\ndef open_prefetch():\n    try:\n        os.startfile(prefetch_path)\n        print(\"Opened Prefetch Folder\")\n    except Exception as e:\n        print(\"Error opening Prefetch Folder:\", str(e))",
+        "detail": "functions.prefetch",
+        "documentation": {}
+    },
+    {
+        "label": "run_sfc_scan",
+        "kind": 2,
+        "importPath": "functions.sfc_scannow",
+        "description": "functions.sfc_scannow",
+        "peekOfCode": "def run_sfc_scan():\n    try:\n        os.startfile(cmd_path)\n        print(\"Otvorený CMD\")\n        time.sleep(2)\n        while True:\n            active_window = gw.getWindowsWithTitle(\"Administrator: cmd\")\n            if active_window:  # Ak sme našli okno\n                active_window = active_window[0]\n                break",
+        "detail": "functions.sfc_scannow",
+        "documentation": {}
+    },
+    {
+        "label": "cmd_path",
+        "kind": 5,
+        "importPath": "functions.sfc_scannow",
+        "description": "functions.sfc_scannow",
+        "peekOfCode": "cmd_path = r'AssetsScripts\\cmd.lnk'\ndef run_sfc_scan():\n    try:\n        os.startfile(cmd_path)\n        print(\"Otvorený CMD\")\n        time.sleep(2)\n        while True:\n            active_window = gw.getWindowsWithTitle(\"Administrator: cmd\")\n            if active_window:  # Ak sme našli okno\n                active_window = active_window[0]",
+        "detail": "functions.sfc_scannow",
+        "documentation": {}
+    },
+    {
+        "label": "open_signalrgb",
+        "kind": 2,
+        "importPath": "functions.signalrgb",
+        "description": "functions.signalrgb",
+        "peekOfCode": "def open_signalrgb():\n    try:\n        os.startfile(signalrgb_path)\n        print(\"Opened SignalRGB\")\n    except Exception as e:\n        print(\"Error opening SignalRGB:\", str(e))",
+        "detail": "functions.signalrgb",
+        "documentation": {}
+    },
+    {
+        "label": "signalrgb_path",
+        "kind": 5,
+        "importPath": "functions.signalrgb",
+        "description": "functions.signalrgb",
+        "peekOfCode": "signalrgb_path = r'AssetsScripts\\SignalRgb.lnk'\ndef open_signalrgb():\n    try:\n        os.startfile(signalrgb_path)\n        print(\"Opened SignalRGB\")\n    except Exception as e:\n        print(\"Error opening SignalRGB:\", str(e))",
+        "detail": "functions.signalrgb",
+        "documentation": {}
+    },
+    {
+        "label": "clean_temp",
+        "kind": 2,
+        "importPath": "functions.temp",
+        "description": "functions.temp",
+        "peekOfCode": "def clean_temp():\n    try:\n        os.startfile(temp_path)\n        print(\"Opened Temp Folder\")\n    except Exception as e:\n        print(\"Error opening Clean Temp Script:\", str(e))",
+        "detail": "functions.temp",
+        "documentation": {}
+    },
+    {
+        "label": "temp_path",
+        "kind": 5,
+        "importPath": "functions.temp",
+        "description": "functions.temp",
+        "peekOfCode": "temp_path = r'AssetsScripts\\SPEEDUP.BAT'\ndef clean_temp():\n    try:\n        os.startfile(temp_path)\n        print(\"Opened Temp Folder\")\n    except Exception as e:\n        print(\"Error opening Clean Temp Script:\", str(e))",
+        "detail": "functions.temp",
+        "documentation": {}
+    },
+    {
+        "label": "open_ticktick",
+        "kind": 2,
+        "importPath": "functions.ticktick",
+        "description": "functions.ticktick",
+        "peekOfCode": "def open_ticktick():\n    try:\n        os.startfile(ticktick_path)\n        print(\"Opened TickTick\")\n    except Exception as e:\n        print(\"Error opening TickTick:\", str(e))",
+        "detail": "functions.ticktick",
+        "documentation": {}
+    },
+    {
+        "label": "ticktick_path",
+        "kind": 5,
+        "importPath": "functions.ticktick",
+        "description": "functions.ticktick",
+        "peekOfCode": "ticktick_path = r'AssetsScripts\\TickTick.lnk'\ndef open_ticktick():\n    try:\n        os.startfile(ticktick_path)\n        print(\"Opened TickTick\")\n    except Exception as e:\n        print(\"Error opening TickTick:\", str(e))",
+        "detail": "functions.ticktick",
+        "documentation": {}
+    },
+    {
+        "label": "run_win_optimize",
+        "kind": 2,
+        "importPath": "functions.windows_optimize",
+        "description": "functions.windows_optimize",
+        "peekOfCode": "def run_win_optimize():\n    try:\n        os.startfile(win_optimize_path)\n        print(\"Opened Windows Optimize Script\")\n    except Exception as e:\n        print(\"Error openning Windows Optimize Script:\", str(e))",
+        "detail": "functions.windows_optimize",
+        "documentation": {}
+    },
+    {
+        "label": "win_optimize_path",
+        "kind": 5,
+        "importPath": "functions.windows_optimize",
+        "description": "functions.windows_optimize",
+        "peekOfCode": "win_optimize_path = r'AssetsScripts\\Windows Optimization.bat'\ndef run_win_optimize():\n    try:\n        os.startfile(win_optimize_path)\n        print(\"Opened Windows Optimize Script\")\n    except Exception as e:\n        print(\"Error openning Windows Optimize Script:\", str(e))",
+        "detail": "functions.windows_optimize",
+        "documentation": {}
+    },
+    {
+        "label": "run_winget",
+        "kind": 2,
+        "importPath": "functions.winget",
+        "description": "functions.winget",
+        "peekOfCode": "def run_winget():\n    try:\n        os.startfile(cmd_path)\n        print(\"Otvorený CMD\")\n        time.sleep(2)\n        while True:\n            active_window = gw.getWindowsWithTitle(\"Administrator: cmd\")\n            if active_window:  # Ak sme našli okno\n                active_window = active_window[0]\n                break",
+        "detail": "functions.winget",
+        "documentation": {}
+    },
+    {
+        "label": "cmd_path",
+        "kind": 5,
+        "importPath": "functions.winget",
+        "description": "functions.winget",
+        "peekOfCode": "cmd_path = r'AssetsScripts\\cmd.lnk'\ndef run_winget():\n    try:\n        os.startfile(cmd_path)\n        print(\"Otvorený CMD\")\n        time.sleep(2)\n        while True:\n            active_window = gw.getWindowsWithTitle(\"Administrator: cmd\")\n            if active_window:  # Ak sme našli okno\n                active_window = active_window[0]",
+        "detail": "functions.winget",
+        "documentation": {}
+    },
+    {
+        "label": "win_update",
+        "kind": 2,
+        "importPath": "functions.win_update",
+        "description": "functions.win_update",
+        "peekOfCode": "def win_update():\n    try:\n        os.system(\"start ms-settings:windowsupdate\")\n        print(\"Opened Windows Update\")\n    except Exception as e:\n        print(\"Error opening Windows Update:\", str(e))",
+        "detail": "functions.win_update",
+        "documentation": {}
+    },
+    {
+        "label": "open_word",
+        "kind": 2,
+        "importPath": "functions.word",
+        "description": "functions.word",
+        "peekOfCode": "def open_word():\n    try:\n        os.startfile(word_path)\n        print(\"Opened Word\")\n    except Exception as e:\n        print(\"Error opening Word:\", str(e))",
+        "detail": "functions.word",
+        "documentation": {}
+    },
+    {
+        "label": "word_path",
+        "kind": 5,
+        "importPath": "functions.word",
+        "description": "functions.word",
+        "peekOfCode": "word_path = r'AssetsScripts\\Word.lnk'\ndef open_word():\n    try:\n        os.startfile(word_path)\n        print(\"Opened Word\")\n    except Exception as e:\n        print(\"Error opening Word:\", str(e))",
+        "detail": "functions.word",
+        "documentation": {}
+    },
+    {
+        "label": "StdoutRedirector",
+        "kind": 6,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "class StdoutRedirector:\n    def __init__(self, widget):\n        self.widget = widget\n    def write(self, text):\n        self.widget.insert(tk.END, text)\n        self.widget.see(tk.END)  # Scroll to the bottom\nsys.stdout = StdoutRedirector(output_text)\ntry:\n  update_colors()\n  root.mainloop()",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "stop_all_functions",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def stop_all_functions():\n    stop_event.set()\n    print(\"All functions execution stopped.\")\n# Run single function\ndef run_function(func):\n    try:\n        func()  # Call the function directly without extra output\n        root.update()  # Update the GUI to keep it responsive\n        print(f\"Function {func.__name__} Completed!\")\n    except Exception as e:",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "run_function",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def run_function(func):\n    try:\n        func()  # Call the function directly without extra output\n        root.update()  # Update the GUI to keep it responsive\n        print(f\"Function {func.__name__} Completed!\")\n    except Exception as e:\n        print(f\"Error running function {func.__name__}: {e}\")\n    finally:\n        if not stop_event.is_set():  # Add condition to check if the function was stopped\n            print(\"Pause 0.5s...\")",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "run_all_functions",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def run_all_functions(functions_to_run):\n    for func_name in functions_to_run:\n        func = functions_mapping.get(func_name)\n        if func:\n            run_function(func)\n            root.update()\n# Run selected functions\ndef run_selected_functions(selected_functions):\n    for func_name in selected_functions:\n        func = functions_mapping.get(func_name)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "run_selected_functions",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def run_selected_functions(selected_functions):\n    for func_name in selected_functions:\n        func = functions_mapping.get(func_name)\n        if func:\n            run_function(func)\n            root.update()  # Update the GUI to keep it responsive\n            # Odznačenie zaškrtnutého checkboxu po spustení funkcie\n            checkbox_var = checkboxes.get(func_name)\n            if checkbox_var:\n                checkbox_var.set(False)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "update_colors",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def update_colors():\n    for button_frame in function_buttons_frame.winfo_children():\n        button_frame.configure(bg=bg_color)\n# Functions with Text\nfunctions_mapping = {\n    \"Open Disk Cleanup\": disk_cleanup.run_disk_cleanup,\n    \"Clean Temp\": temp.clean_temp,\n    \"Bcdedit Optimizer\": bcdedit_optimizer.run_bcdedit,\n    \"Clean Log Files\": log_files.run_logfiles,\n    \"Windows Optimize\": windows_optimize.run_win_optimize,",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "on_canvas_mouse_wheel",
+        "kind": 2,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "def on_canvas_mouse_wheel(event):\n    canvas.yview_scroll(-1*(event.delta//120), \"units\")\ncanvas.bind_all(\"<MouseWheel>\", on_canvas_mouse_wheel)\n# Checkboxes for functions buttons\ncheckboxes = {}\nfor function_name, func in functions_mapping.items():\n    checkbox_var = tk.BooleanVar(value=False)\n    checkboxes[function_name] = checkbox_var\n    button_frame = tk.Frame(function_buttons_frame)\n    button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=4)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "root",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "root = ctk.CTk()\nctk.set_appearance_mode(\"dark\")\nroot.title(\"KNX Cleaner & Updater\")\nroot.resizable(False,False)\nroot.option_add(\"*Font\", \"Roboto 10\",)  # Change font size globally\nroot.iconbitmap(\"icon.ico\")\nlabel = ctk.CTkLabel(root, text=\"KNX Cleaner & Updater\", font=(\"Roboto\",13, \"bold\"))\nbg_color = \"#292929\"\nfg_color = \"#A9A9A9\"\nset_color = \"#161616\"",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "label",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "label = ctk.CTkLabel(root, text=\"KNX Cleaner & Updater\", font=(\"Roboto\",13, \"bold\"))\nbg_color = \"#292929\"\nfg_color = \"#A9A9A9\"\nset_color = \"#161616\"\ngreen_color = \"#33691E\"\nred_color = \"#441A19\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "bg_color",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "bg_color = \"#292929\"\nfg_color = \"#A9A9A9\"\nset_color = \"#161616\"\ngreen_color = \"#33691E\"\nred_color = \"#441A19\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "fg_color",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "fg_color = \"#A9A9A9\"\nset_color = \"#161616\"\ngreen_color = \"#33691E\"\nred_color = \"#441A19\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions\ndef stop_all_functions():",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "set_color",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "set_color = \"#161616\"\ngreen_color = \"#33691E\"\nred_color = \"#441A19\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions\ndef stop_all_functions():\n    stop_event.set()",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "green_color",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "green_color = \"#33691E\"\nred_color = \"#441A19\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions\ndef stop_all_functions():\n    stop_event.set()\n    print(\"All functions execution stopped.\")",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "red_color",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "red_color = \"#441A19\"\nlabel.pack()\n# ******************** FUNCTIONS ********************\n# Define stop_event as a global variable\nstop_event = threading.Event()\n# Stop all functions\ndef stop_all_functions():\n    stop_event.set()\n    print(\"All functions execution stopped.\")\n# Run single function",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "stop_event",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "stop_event = threading.Event()\n# Stop all functions\ndef stop_all_functions():\n    stop_event.set()\n    print(\"All functions execution stopped.\")\n# Run single function\ndef run_function(func):\n    try:\n        func()  # Call the function directly without extra output\n        root.update()  # Update the GUI to keep it responsive",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "functions_mapping",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "functions_mapping = {\n    \"Open Disk Cleanup\": disk_cleanup.run_disk_cleanup,\n    \"Clean Temp\": temp.clean_temp,\n    \"Bcdedit Optimizer\": bcdedit_optimizer.run_bcdedit,\n    \"Clean Log Files\": log_files.run_logfiles,\n    \"Windows Optimize\": windows_optimize.run_win_optimize,\n    \"Flush DNS Cache\": ipconfig.flush_dns,\n    \"Open Prefetch Folder\": prefetch.open_prefetch,\n    \"Open Disk Defragmentation\": defrag.defrag,\n    \"Open Windows Update\": win_update.win_update,",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "canvas",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "canvas = ctk.CTkCanvas(root, bg=bg_color, width=250, height=400, highlightthickness=0)\ncanvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)\n# Functions buttons\nfunction_buttons_frame = ctk.CTkFrame(canvas, bg_color=bg_color, fg_color=bg_color)\n# Scrollbar functionality\nscrollbar = ctk.CTkScrollbar(root, command=canvas.yview,)\nscrollbar.pack(side=tk.RIGHT, fill=tk.Y)\n# Configure canvas and scrollbar\ncanvas.configure(yscrollcommand=scrollbar.set)\ncanvas.create_window((0, 0), window=function_buttons_frame, anchor=tk.NW)",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "function_buttons_frame",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "function_buttons_frame = ctk.CTkFrame(canvas, bg_color=bg_color, fg_color=bg_color)\n# Scrollbar functionality\nscrollbar = ctk.CTkScrollbar(root, command=canvas.yview,)\nscrollbar.pack(side=tk.RIGHT, fill=tk.Y)\n# Configure canvas and scrollbar\ncanvas.configure(yscrollcommand=scrollbar.set)\ncanvas.create_window((0, 0), window=function_buttons_frame, anchor=tk.NW)\n# Function to scroll the canvas with the mouse wheel\ndef on_canvas_mouse_wheel(event):\n    canvas.yview_scroll(-1*(event.delta//120), \"units\")",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "scrollbar",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "scrollbar = ctk.CTkScrollbar(root, command=canvas.yview,)\nscrollbar.pack(side=tk.RIGHT, fill=tk.Y)\n# Configure canvas and scrollbar\ncanvas.configure(yscrollcommand=scrollbar.set)\ncanvas.create_window((0, 0), window=function_buttons_frame, anchor=tk.NW)\n# Function to scroll the canvas with the mouse wheel\ndef on_canvas_mouse_wheel(event):\n    canvas.yview_scroll(-1*(event.delta//120), \"units\")\ncanvas.bind_all(\"<MouseWheel>\", on_canvas_mouse_wheel)\n# Checkboxes for functions buttons",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "checkboxes",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "checkboxes = {}\nfor function_name, func in functions_mapping.items():\n    checkbox_var = tk.BooleanVar(value=False)\n    checkboxes[function_name] = checkbox_var\n    button_frame = tk.Frame(function_buttons_frame)\n    button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=4)\n    checkbox = ctk.CTkCheckBox(button_frame, text=function_name, variable=checkbox_var, onvalue=True, offvalue=False, border_width=2, checkbox_width=20, checkbox_height=20, hover_color=fg_color, fg_color=(fg_color, set_color), font=(\"Roboto\", 14,))\n    checkbox.pack(side=tk.LEFT)\n# Update the canvas scroll region after adding widgets\nfunction_buttons_frame.update_idletasks()",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "run_selected_functions_button",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "run_selected_functions_button = ctk.CTkButton(root, text=\"Run Selected\", command=lambda: run_selected_functions([func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]), fg_color=set_color)\nrun_selected_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\nall_functions_button = ctk.CTkButton(root, text=\"Run All\", command=lambda: run_all_functions(functions_mapping.keys()), fg_color=set_color, hover_color=green_color)\nall_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\nstop_all_functions_button = ctk.CTkButton(root, text=\"Stop All\", command=stop_all_functions, fg_color=red_color, hover_color=red_color)\nstop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\n# Bottom, Style: Output Text Widget\noutput_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg=bg_color, fg=fg_color)\noutput_text.pack(pady=10)\n# ******************** RUN ********************",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "all_functions_button",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "all_functions_button = ctk.CTkButton(root, text=\"Run All\", command=lambda: run_all_functions(functions_mapping.keys()), fg_color=set_color, hover_color=green_color)\nall_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\nstop_all_functions_button = ctk.CTkButton(root, text=\"Stop All\", command=stop_all_functions, fg_color=red_color, hover_color=red_color)\nstop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\n# Bottom, Style: Output Text Widget\noutput_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg=bg_color, fg=fg_color)\noutput_text.pack(pady=10)\n# ******************** RUN ********************\n# Output Text - Redirect stdout to the output text widget\nclass StdoutRedirector:",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "stop_all_functions_button",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "stop_all_functions_button = ctk.CTkButton(root, text=\"Stop All\", command=stop_all_functions, fg_color=red_color, hover_color=red_color)\nstop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)\n# Bottom, Style: Output Text Widget\noutput_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg=bg_color, fg=fg_color)\noutput_text.pack(pady=10)\n# ******************** RUN ********************\n# Output Text - Redirect stdout to the output text widget\nclass StdoutRedirector:\n    def __init__(self, widget):\n        self.widget = widget",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "output_text",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "output_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg=bg_color, fg=fg_color)\noutput_text.pack(pady=10)\n# ******************** RUN ********************\n# Output Text - Redirect stdout to the output text widget\nclass StdoutRedirector:\n    def __init__(self, widget):\n        self.widget = widget\n    def write(self, text):\n        self.widget.insert(tk.END, text)\n        self.widget.see(tk.END)  # Scroll to the bottom",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "sys.stdout",
+        "kind": 5,
+        "importPath": "main",
+        "description": "main",
+        "peekOfCode": "sys.stdout = StdoutRedirector(output_text)\ntry:\n  update_colors()\n  root.mainloop()\nexcept KeyboardInterrupt:\n    print(\"Quitting... by keyboard interrupt\")\n    sys.exit()",
+        "detail": "main",
+        "documentation": {}
+    },
+    {
+        "label": "all_windows",
+        "kind": 5,
+        "importPath": "ShowWindowTitles",
+        "description": "ShowWindowTitles",
+        "peekOfCode": "all_windows = gw.getAllTitles()\n# Výpis názvov okien\nfor window in all_windows:\n    print(window)",
+        "detail": "ShowWindowTitles",
+        "documentation": {}
+    }
+]

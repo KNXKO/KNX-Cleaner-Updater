@@ -4,20 +4,26 @@ from tkinter import scrolledtext
 import customtkinter as ctk
 import sys
 import time
+# ******************** IMPORT FUNCTIONS ********************
 from functions import disk_cleanup, prefetch, win_update, ms_store_update, \
     defrag, temp, learix_fps, adobe, word, ticktick, signalrgb, ccleaner, close_apps, nvidia, drivers_link, bcdedit_optimizer, log_files, windows_optimize, ipconfig, sfc_scannow, winget
 
-# Global Windows: Title, Window, Font, Icon
+# GUI: Title, Window, Font, Icon
 root = ctk.CTk()
-root.title("KNX")
-root.resizable(False, True)
-root.option_add("*Font", "Calibri")
+ctk.set_appearance_mode("dark")
+root.title("KNX Cleaner & Updater")
+root.resizable(False,False)
+root.option_add("*Font", "Roboto 10",)  # Change font size globally
 root.iconbitmap("icon.ico")
-# Style: TOP Text
-label = tk.Label(root, text="KNX Cleaner & Updater", font=("Calibri", 13))
+label = ctk.CTkLabel(root, text="KNX Cleaner & Updater", font=("Roboto",13, "bold"))
 bg_color = "#292929"
 fg_color = "#A9A9A9"
+set_color = "#161616"
+green_color = "#33691E"
+red_color = "#441A19"
 label.pack()
+
+# ******************** FUNCTIONS ********************
 
 # Define stop_event as a global variable
 stop_event = threading.Event()
@@ -27,7 +33,7 @@ def stop_all_functions():
     stop_event.set()
     print("All functions execution stopped.")
 
-# Run function
+# Run single function
 def run_function(func):
     try:
         func()  # Call the function directly without extra output
@@ -41,7 +47,7 @@ def run_function(func):
             time.sleep(0.5)  # 0.5 second pause
         output_text.see(tk.END)
 
-# Start all functions
+# Run all functions
 def run_all_functions(functions_to_run):
     for func_name in functions_to_run:
         func = functions_mapping.get(func_name)
@@ -61,29 +67,22 @@ def run_selected_functions(selected_functions):
             if checkbox_var:
                 checkbox_var.set(False)
 
+# Update the GUI colors to dark
 def update_colors():
-    root.config(bg=bg_color)
-    label.config(bg=bg_color, fg=fg_color)
-    function_buttons_frame.config(bg=bg_color)
-
     for button_frame in function_buttons_frame.winfo_children():
         button_frame.configure(bg=bg_color)
-        for button in button_frame.winfo_children():
-            button.configure(bg=bg_color, fg=fg_color)
 
-    all_functions_button.configure(bg=bg_color, fg=fg_color)
-    stop_all_functions_button.configure(bg=bg_color, fg=fg_color)
 
-# Functions with Text properties
+# Functions with Text
 functions_mapping = {
-    "Run Disk Cleanup": disk_cleanup.run_disk_cleanup,
-    "Run Clean Temp Script": temp.clean_temp,
-    "Run Bcdedit Optimizer Script": bcdedit_optimizer.run_bcdedit,
-    "Run Log Files Cleaner Script": log_files.run_logfiles,
-    "Run Windows Optimize Script": windows_optimize.run_win_optimize,
-    "Flush DNS": ipconfig.flush_dns,
+    "Open Disk Cleanup": disk_cleanup.run_disk_cleanup,
+    "Clean Temp": temp.clean_temp,
+    "Bcdedit Optimizer": bcdedit_optimizer.run_bcdedit,
+    "Clean Log Files": log_files.run_logfiles,
+    "Windows Optimize": windows_optimize.run_win_optimize,
+    "Flush DNS Cache": ipconfig.flush_dns,
     "Open Prefetch Folder": prefetch.open_prefetch,
-    "Disk Defrag": defrag.defrag,
+    "Open Disk Defragmentation": defrag.defrag,
     "Open Windows Update": win_update.win_update,
     "Open MS Store": ms_store_update.ms_store_update,
     "Open Adobe Creative Cloud": adobe.open_adobe,
@@ -96,11 +95,12 @@ functions_mapping = {
     "Open CCleaner": ccleaner.open_ccleaner,
 }
 
-canvas = tk.Canvas(root, bg=bg_color, width=250, height=400, highlightthickness=0)
+# ******************** GUI ********************
+canvas = ctk.CTkCanvas(root, bg=bg_color, width=250, height=400, highlightthickness=0)
 canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 
 # Functions buttons
-function_buttons_frame = tk.Frame(canvas, bg=bg_color)
+function_buttons_frame = ctk.CTkFrame(canvas, bg_color=bg_color, fg_color=bg_color)
 
 # Scrollbar functionality
 scrollbar = ctk.CTkScrollbar(root, command=canvas.yview,)
@@ -120,32 +120,31 @@ for function_name, func in functions_mapping.items():
     checkboxes[function_name] = checkbox_var
 
     button_frame = tk.Frame(function_buttons_frame)
-    button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+    button_frame.pack(side=tk.TOP, fill=tk.X, padx=5, pady=4)
 
-    checkbox = tk.Checkbutton(button_frame, text=function_name, variable=checkbox_var, onvalue=True, offvalue=False)
+    checkbox = ctk.CTkCheckBox(button_frame, text=function_name, variable=checkbox_var, onvalue=True, offvalue=False, border_width=2, checkbox_width=20, checkbox_height=20, hover_color=fg_color, fg_color=(fg_color, set_color), font=("Roboto", 14,))
     checkbox.pack(side=tk.LEFT)
-
-    checkbox.configure(bg=bg_color, fg=fg_color)
 
 # Update the canvas scroll region after adding widgets
 function_buttons_frame.update_idletasks()
 canvas.configure(scrollregion=canvas.bbox("all"))
 
 # Run all, stop all, run selected buttons
-all_functions_button = tk.Button(root, text="Run all", command=lambda: run_all_functions(functions_mapping.keys()))
+run_selected_functions_button = ctk.CTkButton(root, text="Run Selected", command=lambda: run_selected_functions([func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]), fg_color=set_color)
+run_selected_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+
+all_functions_button = ctk.CTkButton(root, text="Run All", command=lambda: run_all_functions(functions_mapping.keys()), fg_color=set_color, hover_color=green_color)
 all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
-stop_all_functions_button = tk.Button(root, text="Stop all", command=stop_all_functions)
+stop_all_functions_button = ctk.CTkButton(root, text="Stop All", command=stop_all_functions, fg_color=red_color, hover_color=red_color)
 stop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
-
-run_selected_functions_button = tk.Button(root, text="Run Selected Functions", command=lambda: run_selected_functions([func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]))
-run_selected_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
 # Bottom, Style: Output Text Widget
 output_text = scrolledtext.ScrolledText(root, width=30, height=7, wrap=tk.WORD, bg=bg_color, fg=fg_color)
 output_text.pack(pady=10)
 
-# Class Bottom Output Text - Redirect stdout to the output text widget
+# ******************** RUN ********************
+# Output Text - Redirect stdout to the output text widget
 class StdoutRedirector:
     def __init__(self, widget):
         self.widget = widget
