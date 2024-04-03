@@ -7,3 +7,4 @@ dist/
 build/
 *.spec
 ShowWindowTitles.py
+*.json
