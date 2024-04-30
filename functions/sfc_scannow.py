@@ -5,7 +5,7 @@ import pygetwindow as gw
 
 cmd_path = r'AssetsScripts\cmd.lnk'
 
-def run_sfc_scan():
+def run_sfc():
     try:
         os.startfile(cmd_path)
         print("Otvorený CMD")

@@ -5,7 +5,7 @@ import sys
 import time
 # ******************** IMPORT FUNCTIONS ********************
 from functions import disk_cleanup, prefetch, win_update, ms_store_update, \
-    defrag, temp, learix_fps, adobe, word, ticktick, signalrgb, ccleaner, close_apps, nvidia, drivers_link, bcdedit_optimizer, log_files, windows_optimize, ipconfig, sfc_scannow, winget
+    defrag, temp, learix_fps, adobe, word, ticktick, signalrgb, ccleaner, close_apps, nvidia, drivers_link, bcdedit_optimizer, log_files, windows_optimize, ipconfig, sfc_scannow
 
 # GUI: Title, Window, Font, Icon
 root = ctk.CTk()
@@ -71,12 +71,14 @@ def run_selected_functions(selected_functions):
 
 # Functions with Text
 functions_mapping = {
+    "Run Learix FPS": learix_fps.learix_fps,
     "Open Disk Cleanup": disk_cleanup.run_disk_cleanup,
     "Clean Temp": temp.clean_temp,
     "Bcdedit Optimizer": bcdedit_optimizer.run_bcdedit,
     "Clean Log Files": log_files.run_logfiles,
     "Windows Optimize": windows_optimize.run_win_optimize,
     "Flush DNS Cache": ipconfig.flush_dns,
+    "Run SFC /Scannow": sfc_scannow.run_sfc,
     "Open Prefetch Folder": prefetch.open_prefetch,
     "Open Disk Defragmentation": defrag.defrag,
     "Open Windows Update": win_update.win_update,
