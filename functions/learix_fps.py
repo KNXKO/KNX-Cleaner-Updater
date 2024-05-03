@@ -10,6 +10,7 @@ def learix_fps():
         os.startfile(learix_path)
         # Čakanie na zobrazenie okna s názvom "Administrator:  Learix FPS 2.0" do 5 sekúnd
         timeout = time.time() + 5  # Nastavenie maximálneho času čakania na 5 sekúnd
+        time.sleep(3)
         while True:
             active_window = gw.getWindowsWithTitle("Administrator:  Learix FPS 2.0")
             if active_window:  # Ak sme našli okno
