@@ -120,7 +120,7 @@ for function_name, func in functions_mapping.items():
     button_frame.pack(side=tk.TOP, fill=tk.X, pady=4)
 
     checkbox = ctk.CTkCheckBox(button_frame, text=function_name, variable=checkbox_var, onvalue=True,font=font,offvalue=False, border_width=2, checkbox_width=20, checkbox_height=20, hover_color=text_color, fg_color=(text_color, button_color))
-    checkbox.pack(side=tk.LEFT)
+    checkbox.pack(side=tk.LEFT, padx=5)
 
 # Update the canvas scroll region after adding widgets
 function_buttons_frame.update_idletasks()
@@ -138,7 +138,7 @@ stop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
 
 # Output Text Widget
 output_text = ctk.CTkTextbox(root, width=250, height=200, wrap=tk.WORD, font=font, fg_color=button_color)
-output_text.pack(pady=10)
+output_text.pack(pady=10, padx=5)
 
 # ******************** RUN ********************
 # Output Text - Redirect stdout to the output text widget
