@@ -5,6 +5,8 @@ adobe_path = r'AssetsScripts\Adobe Creative Cloud.lnk'
 def open_adobe():
     try:
         os.startfile(adobe_path)
-        print("Opened Adobe Creative Cloud")
+        print("Adobe Creative Cloud successfully opened.")
+        return True
     except Exception as e:
-        print("Error opening Adobe Creative Cloud:", str(e))
+        print(f"Error opening Adobe Creative Cloud: {e}")
+        return False

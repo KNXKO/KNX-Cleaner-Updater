@@ -3,6 +3,8 @@ import os
 def win_update():
     try:
         os.system("start ms-settings:windowsupdate")
-        print("Opened Windows Update")
+        print("Windows Update successfully opened.")
+        return True
     except Exception as e:
-        print("Error opening Windows Update:", str(e))
+        print(f"Error opening Windows Update: {e}")
+        return False

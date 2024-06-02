@@ -5,6 +5,8 @@ word_path = r'AssetsScripts\Word.lnk'
 def open_word():
     try:
         os.startfile(word_path)
-        print("Opened Word")
+        print("Word successfully opened.")
+        return True
     except Exception as e:
-        print("Error opening Word:", str(e))
+        print(f"Error opening Word: {e}")
+        return False

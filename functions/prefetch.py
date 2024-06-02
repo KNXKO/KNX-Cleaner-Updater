@@ -5,6 +5,8 @@ prefetch_path = r'C:\Windows\Prefetch'
 def open_prefetch():
     try:
         os.startfile(prefetch_path)
-        print("Opened Prefetch Folder")
+        print("Prefetch folder successfully opened.")
+        return True
     except Exception as e:
-        print("Error opening Prefetch Folder:", str(e))
+        print(f"Error opening Prefetch Folder: {e}")
+        return False

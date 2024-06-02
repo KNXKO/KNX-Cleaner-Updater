@@ -5,6 +5,8 @@ signalrgb_path = r'AssetsScripts\SignalRgb.lnk'
 def open_signalrgb():
     try:
         os.startfile(signalrgb_path)
-        print("Opened SignalRGB")
+        print("SignalRGB successfully opened.")
+        return True
     except Exception as e:
-        print("Error opening SignalRGB:", str(e))
+        print(f"Error opening SignalRGB: {e}")
+        return False

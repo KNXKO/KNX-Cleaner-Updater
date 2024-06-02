@@ -1,7 +1,6 @@
 import threading
 import tkinter as tk
 import customtkinter as ctk
-import sys
 import time
 # ******************** IMPORT FUNCTIONS ********************
 from functions import disk_cleanup, prefetch, win_update, ms_store_update, \
@@ -26,6 +25,7 @@ button_color_hover = "#2F2F2F"
 green_color = "#33691E"
 red_color = "#441A19"
 red_color_hover = "#692827"
+
 # ******************** FUNCTIONS ********************
 
 # Define stop_event as a global variable
@@ -38,10 +38,15 @@ def stop_all_functions():
 
 # Run single function
 def run_function(func):
+    success = False  # Initiate the success variable
     try:
-        func()  # Call the function directly without extra output
+        result = func()  # Call the function directly without extra output
         root.update()  # Update the GUI to keep it responsive
-        print(f"Function {func.__name__} Completed!")
+        if result is False:
+            print(f"Function {func.__name__} Failed!")  # Print the failure message
+        else:
+            print(f"Function {func.__name__} Completed!")  # Print the completion message
+        success = True  # Mark the function as successful
     except Exception as e:
         print(f"Error running function {func.__name__}: {e}")
     finally:
@@ -52,22 +57,71 @@ def run_function(func):
 
 # Run all functions
 def run_all_functions(functions_to_run):
+    results = {}
     for func_name in functions_to_run:
         func = functions_mapping.get(func_name)
         if func:
-            run_function(func)
-            root.update()
+            try:
+                func_result = func()  # Call the function directly without extra output
+                results[func_name] = func_result
+            except Exception as e:
+                results[func_name] = str(e)
+    show_result_message(results)
 
 # Run selected functions
 def run_selected_functions(selected_functions):
+    checked_functions = [func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]
+    if not checked_functions:
+        # Spoja emoji s hláškou
+        message = f"⚠️ No Functions Selected.\nPlease select at least one function to run."
+        show_alert_window("Warning", message)
+        return
+
+    results = {}
     for func_name in selected_functions:
         func = functions_mapping.get(func_name)
         if func:
-            run_function(func)
-            root.update()
-            checkbox_var = checkboxes.get(func_name)
-            if checkbox_var:
-                checkbox_var.set(False)
+            try:
+                func_result = func()  # Call the function directly without extra output
+                results[func_name] = func_result
+            except Exception as e:
+                results[func_name] = str(e)
+    show_result_message(results)
+
+def show_result_message(results):
+    success = all(result is True for result in results.values())
+    if success:
+        message = "✅ All functions executed successfully."
+    else:
+        message = "❌ Some functions encountered errors:\n"
+        for func_name, result in results.items():
+            if result is not True:
+                message += f"❗{func_name}: {result}.\n"
+    show_alert_window("Function Execution Results", message.strip())
+
+def show_alert_window(title, message):
+    alert_window = ctk.CTkToplevel(root)
+    alert_window.title("Results")
+    alert_window.resizable(False, False)
+    alert_window.attributes('-topmost', True)  # Make window always on top
+    alert_window.after(250, lambda: alert_window.iconbitmap("icon.ico"))
+    alert_window.grab_set()  # Nastavenie modálneho okna
+
+    # Get main window position
+    main_x = root.winfo_x()
+    main_y = root.winfo_y()
+    main_width = root.winfo_width()
+    main_height = root.winfo_height()
+    # Calculate alert window position
+    alert_x = main_x + main_width // 2 - 150
+    alert_y = main_y + main_height // 2 - 75
+    alert_window.geometry(f"+{alert_x}+{alert_y}")
+
+    message_label = ctk.CTkLabel(alert_window, text=message, font=font, wraplength=300)
+    message_label.pack(pady=10, padx=30)
+
+    ok_button = ctk.CTkButton(alert_window, text="OK", command=alert_window.destroy, fg_color=button_color, hover_color=button_color_hover, font=font)
+    ok_button.pack(pady=10)
 
 # Functions with Text
 functions_mapping = {
@@ -149,10 +203,8 @@ class StdoutRedirector:
     def write(self, text):
         self.widget.insert(tk.END, text)
         self.widget.see(tk.END)  # Scroll to the bottom
-sys.stdout = StdoutRedirector(output_text)
+        print("Console: ")
 
-try:
-    root.mainloop()
-except KeyboardInterrupt:
-    print("Quitting... by keyboard interrupt")
-    sys.exit()
+    def flush(self):
+        pass  # No need to flush anything in this case
+root.mainloop()

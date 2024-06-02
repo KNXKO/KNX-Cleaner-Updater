@@ -5,6 +5,8 @@ logfiles_path = r'AssetsScripts\Log Files Cleaner.bat'
 def run_logfiles():
     try:
         os.startfile(logfiles_path)
-        print("Opened Log Folder")
+        print("Log folder successfully opened.")
+        return True
     except Exception as e:
-        print("Error opening Log Files Cleaner Script:", str(e))
+        print(f"Error opening Log Files Cleaner Script: {e}")
+        return False

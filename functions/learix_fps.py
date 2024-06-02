@@ -38,6 +38,8 @@ def learix_fps():
             pyautogui.press('x')
             pyautogui.press('enter')
 
-        print("Learix FPS Script Done")
+        print("Learix FPS Script successfully executed.")
+        return True
     except Exception as e:
-        print("Error running Learix FPS Script:", str(e))
+        print(f"Error running Learix FPS Script: {e}")
+        return False

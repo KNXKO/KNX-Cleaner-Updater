@@ -8,19 +8,21 @@ cmd_path = r'AssetsScripts\cmd.lnk'
 def run_sfc():
     try:
         os.startfile(cmd_path)
-        print("Otvorený CMD")
+        print("CMD successfully opened.")
         time.sleep(2)
-        while True:
-            active_window = gw.getWindowsWithTitle("Administrator: cmd")
-            if active_window:  # Ak sme našli okno
-                active_window = active_window[0]
-                break
-            if not active_window:
-                print("Okno príkazového riadku nebolo nájdené.")
-                return
+
+        active_window = gw.getWindowsWithTitle("Administrator: cmd")
+        if not active_window:  # Ak sme nenájdu okno
+            print("Command Prompt window not found.")
+            return False
+
+        active_window = active_window[0]
         active_window.activate()
+
         pyautogui.write('sfc /scannow')
         pyautogui.press('enter')
-        print("SFC skenovanie bolo úspešne spustené.")
+        print("SFC scan successfully initiated.")
+        return True
     except Exception as e:
-        print("Chyba pri otváraní CMD alebo spúšťaní sfc /scannow:", str(e))
+        print(f"Error opening CMD or running sfc /scannow: {e}")
+        return False

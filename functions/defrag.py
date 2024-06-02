@@ -3,6 +3,8 @@ import subprocess
 def defrag():
     try:
         subprocess.Popen('dfrgui.exe')
-        print("Opened Disk Defragmenter")
+        print("Disk Defragmenter successfully opened.")
+        return True
     except Exception as e:
-        print("Error opening Disk Defragmenter:", str(e))
+        print(f"Error opening Disk Defragmenter: {e}")
+        return False

@@ -5,6 +5,8 @@ ticktick_path = r'AssetsScripts\TickTick.lnk'
 def open_ticktick():
     try:
         os.startfile(ticktick_path)
-        print("Opened TickTick")
+        print("TickTick successfully opened.")
+        return True
     except Exception as e:
-        print("Error opening TickTick:", str(e))
+        print(f"Error opening TickTick: {e}")
+        return False
