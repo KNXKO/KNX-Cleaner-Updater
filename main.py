@@ -150,7 +150,6 @@ class StdoutRedirector:
         self.widget.insert(tk.END, text)
         self.widget.see(tk.END)  # Scroll to the bottom
 sys.stdout = StdoutRedirector(output_text)
-print("====== CONSOLE ======")
 
 try:
     root.mainloop()
