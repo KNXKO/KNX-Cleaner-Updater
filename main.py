@@ -1,59 +1,52 @@
-import threading
-import tkinter as tk
 import customtkinter as ctk
-import time
-# ******************** IMPORT FUNCTIONS ********************
-from functions import disk_cleanup, prefetch, win_update, ms_store_update, \
-    defrag, temp, learix_fps, adobe, word, ticktick, signalrgb, ccleaner, close_apps, nvidia, drivers_link, bcdedit_optimizer, log_files, windows_optimize, ipconfig
-
-# GUI: Title, Window, Font, Icon
-root = ctk.CTk()
-root.geometry("550x500")
-ctk.set_appearance_mode("dark")
-root.title("KNX Cleaner & Updater")
-root.resizable(False,False)
-root.iconbitmap("icon.ico")
-font=ctk.CTkFont(family='Centaur', size=17)
-label = ctk.CTkLabel(root, text="KNX Cleaner & Updater", font=font)
-label.pack()
+import getpass
+from mirror import *
+from functions import disk_cleanup, prefetch, win_update, ms_store_update, defrag, temp, learix_fps, adobe, word, ticktick, signalrgb, ccleaner, close_apps, nvidia, drivers_link, bcdedit_optimizer, log_files, windows_optimize, ipconfig
 
 # Define color constants
 bg_color = "#242424"
 text_color = "#A9A9A9"
 button_color = "#161616"
-button_color_hover = "#2F2F2F"
+button_color_hover = "#0d0d0d"
 green_color = "#33691E"
 red_color = "#441A19"
-red_color_hover = "#692827"
+red_color_hover = "#291111"
 
-# ******************** FUNCTIONS ********************
+# Time
+last_run_datetime = get_last_run_datetime()
+save_last_run_datetime()
+time_difference_text = calculate_time_difference(last_run_datetime)
 
-# Define stop_event as a global variable
-stop_event = threading.Event()
+accent_color = get_accent_color()
+
+# Greet user with their name
+username = getpass.getuser()
+
+# ******** Title, Window, Font, Icon ********
+root = ctk.CTk()
+root.geometry("550x500")
+ctk.set_appearance_mode("dark")
+root.title("KNX Cleaner & Updater")
+root.resizable(False, False)
+root.iconbitmap("icon.ico")
+font = ctk.CTkFont(family='Centaur', size=18)
+label = ctk.CTkLabel(root, text=f"Hello, {username}! {time_difference_text}.", font=font)
+label.pack()
 
 # Stop all functions
 def stop_all_functions():
-    stop_event.set()
-    print("All functions execution stopped.")
+    print("All functions execution stopped!")
 
 # Run single function
 def run_function(func):
-    success = False  # Initiate the success variable
+    success = False
     try:
-        result = func()  # Call the function directly without extra output
-        root.update()  # Update the GUI to keep it responsive
+        result = func()
+        root.update()
         if result is False:
-            print(f"Function {func.__name__} Failed!")  # Print the failure message
-        else:
-            print(f"Function {func.__name__} Completed!")  # Print the completion message
-        success = True  # Mark the function as successful
+            print(f"Function {func.__name__} Failed!")
     except Exception as e:
         print(f"Error running function {func.__name__}: {e}")
-    finally:
-        if not stop_event.is_set():  # Add condition to check if the function was stopped
-            print("Pause 0.5s...")
-            time.sleep(0.5)  # 0.5 second pause
-        output_text.see(tk.END)
 
 # Run all functions
 def run_all_functions(functions_to_run):
@@ -62,19 +55,21 @@ def run_all_functions(functions_to_run):
         func = functions_mapping.get(func_name)
         if func:
             try:
-                func_result = func()  # Call the function directly without extra output
+                output_text.insert(ctk.END, f"Running function {func_name}...\n")
+                func_result = func()
                 results[func_name] = func_result
             except Exception as e:
                 results[func_name] = str(e)
-    show_result_message(results)
+    output_text.insert(ctk.END, "====================\n")
+    output_text.see(ctk.END)
+    result_message(results)
 
 # Run selected functions
 def run_selected_functions(selected_functions):
     checked_functions = [func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]
     if not checked_functions:
-        # Spoja emoji s hláškou
         message = f"⚠️ No Functions Selected.\nPlease select at least one function to run."
-        show_alert_window("Warning", message)
+        alert_window("Warning", message)
         return
 
     results = {}
@@ -82,48 +77,21 @@ def run_selected_functions(selected_functions):
         func = functions_mapping.get(func_name)
         if func:
             try:
-                func_result = func()  # Call the function directly without extra output
+                func_result = func()
                 results[func_name] = func_result
             except Exception as e:
                 results[func_name] = str(e)
-    show_result_message(results)
 
-def show_result_message(results):
-    success = all(result is True for result in results.values())
-    if success:
-        message = "✅ All functions executed successfully."
-    else:
-        message = "❌ Some functions encountered errors:\n"
-        for func_name, result in results.items():
-            if result is not True:
-                message += f"❗{func_name}: {result}.\n"
-    show_alert_window("Function Execution Results", message.strip())
+    # Clear checkboxes after execution
+    for func_name, checkbox_var in checkboxes.items():
+        if checkbox_var.get():
+            checkbox_var.set(False)
 
-def show_alert_window(title, message):
-    alert_window = ctk.CTkToplevel(root)
-    alert_window.title("Results")
-    alert_window.resizable(False, False)
-    alert_window.attributes('-topmost', True)  # Make window always on top
-    alert_window.after(250, lambda: alert_window.iconbitmap("icon.ico"))
-    alert_window.grab_set()  # Nastavenie modálneho okna
+    output_text.insert(ctk.END, "====================\n")
+    output_text.see(ctk.END)
+    result_message(results)
 
-    # Get main window position
-    main_x = root.winfo_x()
-    main_y = root.winfo_y()
-    main_width = root.winfo_width()
-    main_height = root.winfo_height()
-    # Calculate alert window position
-    alert_x = main_x + main_width // 2 - 150
-    alert_y = main_y + main_height // 2 - 75
-    alert_window.geometry(f"+{alert_x}+{alert_y}")
-
-    message_label = ctk.CTkLabel(alert_window, text=message, font=font, wraplength=300)
-    message_label.pack(pady=10, padx=30)
-
-    ok_button = ctk.CTkButton(alert_window, text="OK", command=alert_window.destroy, fg_color=button_color, hover_color=button_color_hover, font=font)
-    ok_button.pack(pady=10)
-
-# Functions with Text
+# ******************** FUNCTIONS ********************
 functions_mapping = {
     "Run Learix FPS": learix_fps.learix_fps,
     "Open Disk Cleanup": disk_cleanup.run_disk_cleanup,
@@ -148,63 +116,49 @@ functions_mapping = {
 
 # ******************** GUI ********************
 canvas = ctk.CTkCanvas(root, width=250, height=400, highlightthickness=0, bg=bg_color)
-canvas.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+canvas.pack(side=ctk.LEFT, fill=ctk.BOTH, expand=True)
 
-# Functions buttons
-function_buttons_frame = ctk.CTkCanvas(canvas,highlightthickness=0, bg=bg_color)
+right_frame = ctk.CTkCanvas(canvas, highlightthickness=0, bg=bg_color)
 
-# Scrollbar functionality
+# ******************** SCROLLBAR ********************
 scrollbar = ctk.CTkScrollbar(root, command=canvas.yview)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+scrollbar.pack(side=ctk.RIGHT, fill=ctk.Y)
 # Configure canvas and scrollbar
 canvas.configure(yscrollcommand=scrollbar.set)
-canvas.create_window((0, 0), window=function_buttons_frame, anchor=tk.NW)
+canvas.create_window((0, 0), window=right_frame, anchor=ctk.NW)
 # Function to scroll the canvas with the mouse wheel
 def on_canvas_mouse_wheel(event):
     canvas.yview_scroll(-1*(event.delta//120), "units")
 canvas.bind_all("<MouseWheel>", on_canvas_mouse_wheel)
 
-# Checkboxes for functions buttons
+# ******************** CHECKBOXES ********************
 checkboxes = {}
 for function_name, func in functions_mapping.items():
-    checkbox_var = tk.BooleanVar(value=False)
+    checkbox_var = ctk.BooleanVar(value=False)
     checkboxes[function_name] = checkbox_var
 
-    button_frame = ctk.CTkFrame(function_buttons_frame)
-    button_frame.pack(side=tk.TOP, fill=tk.X, pady=5)
+    button_frame = ctk.CTkFrame(right_frame)
+    button_frame.pack(side=ctk.TOP, fill=ctk.X, pady=5)
 
-    checkbox = ctk.CTkCheckBox(button_frame, text=function_name, variable=checkbox_var, onvalue=True,font=font,offvalue=False, border_width=1, checkbox_width=18, checkbox_height=18, hover_color=text_color, fg_color=(text_color, button_color))
-    checkbox.pack(side=tk.LEFT, padx=5)
+    checkbox = ctk.CTkCheckBox(button_frame, text=function_name, variable=checkbox_var, onvalue=True, font=font, offvalue=False, border_width=1, checkbox_width=18, checkbox_height=18, hover_color=accent_color, fg_color=accent_color)
+    checkbox.pack(side=ctk.LEFT, padx=5)
 
 # Update the canvas scroll region after adding widgets
-function_buttons_frame.update_idletasks()
+right_frame.update_idletasks()
 canvas.configure(scrollregion=canvas.bbox("all"))
 
-# Run all, stop all, run selected buttons
-run_selected_functions_button = ctk.CTkButton(root, text="Run Selected", command=lambda: run_selected_functions([func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]), fg_color=button_color, hover_color=button_color_hover, font=font)
-run_selected_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+# ******************** BUTTONS ********************
+btn_runAll = ctk.CTkButton(root, text="Run All", command=lambda: run_all_functions(functions_mapping.keys()), fg_color=accent_color, hover_color=button_color_hover, font=font)
+btn_runAll.pack(side=ctk.TOP, fill=ctk.X, padx=5, pady=3)
 
-all_functions_button = ctk.CTkButton(root, text="Run All", command=lambda: run_all_functions(functions_mapping.keys()), fg_color=button_color, hover_color=button_color_hover, font=font)
-all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+btn_stopAll = ctk.CTkButton(root, text="Stop All", command=stop_all_functions, fg_color=red_color, hover_color=red_color_hover, font=font)
+btn_stopAll.pack(side=ctk.TOP, fill=ctk.X, padx=5, pady=3)
 
-stop_all_functions_button = ctk.CTkButton(root, text="Stop All", command=stop_all_functions, fg_color=red_color, hover_color=red_color_hover, font=font)
-stop_all_functions_button.pack(side=tk.TOP, fill=tk.X, padx=5, pady=2)
+btn_runSelected = ctk.CTkButton(root, text="Run Selected", command=lambda: run_selected_functions([func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]), fg_color=button_color, hover_color=button_color_hover, font=font)
+btn_runSelected.pack(side=ctk.TOP, fill=ctk.X, padx=5, pady=3)
 
-# Output Text Widget
-output_text = ctk.CTkTextbox(root, width=250, height=200, wrap=tk.WORD, font=font, fg_color=button_color)
-output_text.pack(pady=5, padx=5)
+# ******************** CONSOLE ********************
+output_text = create_console_output(root)
 
-# ******************** RUN ********************
-# Output Text - Redirect stdout to the output text widget
-class StdoutRedirector:
-    def __init__(self, widget):
-        self.widget = widget
-
-    def write(self, text):
-        self.widget.insert(tk.END, text)
-        self.widget.see(tk.END)  # Scroll to the bottom
-        print("Console: ")
-
-    def flush(self):
-        pass  # No need to flush anything in this case
+# ******************** MAIN ********************
 root.mainloop()

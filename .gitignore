@@ -9,3 +9,4 @@ build/
 ShowWindowTitles.py
 *.json
 .vscode/
+*.txt

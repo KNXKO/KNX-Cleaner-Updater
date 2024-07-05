@@ -8,24 +8,21 @@ learix_path = r'AssetsScripts\Learix FPS.bat'
 def learix_fps():
     try:
         os.startfile(learix_path)
-        # Čakanie na zobrazenie okna s názvom "Administrator:  Learix FPS 2.0" do 5 sekúnd
-        timeout = time.time() + 5  # Nastavenie maximálneho času čakania na 5 sekúnd
+        timeout = time.time() + 5
         time.sleep(3)
         while True:
             active_window = gw.getWindowsWithTitle("Administrator:  Learix FPS 2.0")
             if active_window:  # Ak sme našli okno
                 active_window = active_window[0]
                 break
-            if time.time() > timeout:  # Ak prekročíme maximálny čas čakania
+            if time.time() > timeout:
                 raise TimeoutError("Timeout: Window not found.")
-            time.sleep(1)  # Počkáme sekundu a skúsim to znova
-
-        # Aktivácia okna
+            time.sleep(1)
+        print("Learix FPS Script successfully opened.")
         active_window.activate()
         pyautogui.press('1')
         pyautogui.press('enter')
 
-        # Cyklus pre stlačenie ďalších klávesov a Enter
         for i in range(1, 7):
             active_window.activate()
             pyautogui.press(str(i))
