@@ -2,16 +2,16 @@
 
 KNX Cleaner & Updater is a Python application designed to automate various system maintenance tasks on Windows systems. It provides a user-friendly interface for running common maintenance functions such as disk cleanup, defragmentation, software updates, and more.
 
-![Screenshot of KNX Cleaner & Updater](SS/screenshot.png)
+![Screenshot of KNX Cleaner & Updater](SS/KNX_CleanerUpdaterV5.png)
 
 ## Features ✨
 
 - **User-friendly Interface:** The application provides an intuitive graphical user interface (GUI) for easy navigation and operation.
-- **Multiple Maintenance Functions:** KNX Cleaner & Updater offers a range of system maintenance functions, including disk cleanup, prefetch management, Windows updates, application optimizations, and more.
+- **Multiple Maintenance Functions:** Offers a range of system maintenance functions, including disk cleanup, prefetch management, Windows updates, application optimizations, and more.
 - **Run All or Individual Functions:** Users can choose to run all available functions simultaneously or select specific functions to execute.
-- **Output Logging:** Output messages from each function execution are displayed in the application's output window, providing real-time feedback to the user.
-- **Stop All Functions:** Users have the option to stop all running functions with a single click, ensuring control and flexibility during maintenance tasks.
-- **Alert Window:** The application includes an alert window feature to notify users of important events or errors during function execution.
+- **Output Logging:** Displays real-time output messages from each function execution in the application's output window.
+- **Stop All Functions:** Provides an option to stop all running functions with a single click, ensuring control and flexibility during maintenance tasks.
+- **Alert Window:** Includes an alert window feature to notify users of important events or errors during function execution.
 
 ## Installation 🚀
 
@@ -22,24 +22,27 @@ KNX Cleaner & Updater is a Python application designed to automate various syste
 
 ## Usage 🛠️
 
-- Click on the buttons to run individual functions.
-- Click "Run all" to execute all functions sequentially.
-- Click "Stop all" to stop all running functions.
-- The application will log the progress and errors of each function in the output text area.
+- Run Individual Functions: Click on the checkboxes next to each function and use the corresponding button to execute them.
+- Run All Functions: Click "Run All" to execute all functions sequentially.
+- Run Selected Functions: Check the boxes for the functions you want to run and click "Run Selected."
+- Stop All Functions: Click "Stop All" to halt all currently running functions.
+- View Logs: The application will log progress and errors in the output text area for real-time feedback.
 
 ## Dependencies 📦
 
 - Python 3.x
-- `tkinter` (included in standard library)
 - `customtkinter`
 - `pygetwindow`
 - `ctypes`
 - `os`
-- ...
+- Additional dependencies listed in `requirements.txt`
+
+## Latest Version 📅
+- Version 5.0 (Released on August 3, 2024)
 
 ## Contributing 🤝
 
-Contributions are welcome! If you have any ideas for new features, improvements, or bug fixes, feel free to open an issue or submit a pull request.
+Contributions are welcome! If you have ideas for new features, improvements, or bug fixes, please open an issue or submit a pull request. Your feedback and contributions help improve the project.
 
 ## License 📄
 

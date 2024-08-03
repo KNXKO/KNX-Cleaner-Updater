@@ -1,10 +1,12 @@
-pygetwindow
+customtkinter==5.3.0
+pygetwindow==0.0.9
+pyautogui==0.9.53
+#Python standard library
+webbrowser
 ctypes
-customtkinter
 tkinter
+subprocess
 os
 time
 sys
-subprocess
-pyautogui
-webbrowser
+getpass
