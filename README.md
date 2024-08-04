@@ -13,6 +13,10 @@ KNX Cleaner & Updater is a Python application designed to automate various syste
 - **Stop All Functions:** Provides an option to stop all running functions with a single click, ensuring control and flexibility during maintenance tasks.
 - **Alert Window:** Includes an alert window feature to notify users of important events or errors during function execution.
 
+## Latest Version 📅
+
+- Version 5.0 (Released on August 3, 2024)
+
 ## Installation 🚀
 
 1. Clone this repository to your local machine.
@@ -36,9 +40,6 @@ KNX Cleaner & Updater is a Python application designed to automate various syste
 - `ctypes`
 - `os`
 - Additional dependencies listed in `requirements.txt`
-
-## Latest Version 📅
-- Version 5.0 (Released on August 3, 2024)
 
 ## Contributing 🤝
 
