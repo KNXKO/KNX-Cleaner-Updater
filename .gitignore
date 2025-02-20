@@ -1,8 +1,11 @@
-functions/__pycache__/
-AssetsScripts/DATA
-AssetsScripts/LOG
+src/interface/__pycache__/
+src/shortcuts/__pycache__/
+src/scripts/__pycache__/
 TODO.txt
 __pycache__/
+LOG
+DATA
+Setup
 dist/
 build/
 *.spec
@@ -10,3 +13,8 @@ ShowWindowTitles.py
 *.json
 .vscode/
 *.txt
+*.def
+*.ini
+*.exe
+*/temp_ccupdate/*
+/logs

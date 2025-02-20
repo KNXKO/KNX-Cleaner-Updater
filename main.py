@@ -1,10 +1,8 @@
 import customtkinter as ctk
 import getpass
 import threading
-from mirror import *
-from functions import (disk_cleanup, prefetch, win_update, ms_store_update, defrag, temp,
-                       learix_fps, adobe, word, ticktick, signalrgb, ccleaner, close_apps,
-                       nvidia, drivers_link, bcdedit_optimizer, log_files, windows_optimize, ipconfig)
+from src.interface.utils import *
+from src.scripts import functions_mapping
 VERSION = "5.0"
 
 # ************ COLORS ************
@@ -76,30 +74,7 @@ def run_selected_functions():
 
 def stop_all_functions():
     stop_event.set()
-    print("All functions stopped.")
-
-# ******************** FUNCTIONS ********************
-functions_mapping = {
-    "Run Learix FPS": learix_fps.learix_fps,
-    "Open Disk Cleanup": disk_cleanup.run_disk_cleanup,
-    "Clean Temp": temp.clean_temp,
-    "Bcdedit Optimizer": bcdedit_optimizer.run_bcdedit,
-    "Clean Log Files": log_files.run_logfiles,
-    "Windows Optimize": windows_optimize.run_win_optimize,
-    "Flush DNS Cache": ipconfig.flush_dns,
-    "Open Prefetch Folder": prefetch.open_prefetch,
-    "Open Disk Defragmentation": defrag.defrag,
-    "Open Windows Update": win_update.win_update,
-    "Open MS Store": ms_store_update.ms_store_update,
-    "Open Adobe Creative Cloud": adobe.open_adobe,
-    "Open Word": word.open_word,
-    "Open TickTick": ticktick.open_ticktick,
-    "Open SignalRGB": signalrgb.open_signalrgb,
-    "Open Nvidia App": nvidia.open_nvidia,
-    "Open Web Browser with Links": drivers_link.open_drivers_link,
-    "Close Apps (Spotify)": close_apps.close_apps,
-    "Open CCleaner": ccleaner.open_ccleaner,
-}
+    print("⚠️ All functions stopped.")
 
 # ******************** GUI ********************
 canvas = ctk.CTkCanvas(root, width=250, height=400, highlightthickness=0, bg=bg_color)

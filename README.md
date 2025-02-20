@@ -2,7 +2,7 @@
 
 KNX Cleaner & Updater is a Python application designed to automate various system maintenance tasks on Windows systems. It provides a user-friendly interface for running common maintenance functions such as disk cleanup, defragmentation, software updates, and more.
 
-![Screenshot of KNX Cleaner & Updater](SS/KNX_CleanerUpdaterV5.png)
+![Screenshot of KNX Cleaner & Updater](docs/KNX_CleanerUpdaterV5.png)
 
 ## Features ✨
 
