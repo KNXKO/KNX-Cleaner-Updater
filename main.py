@@ -1,6 +1,7 @@
 import customtkinter as ctk
 import getpass
 import threading
+import os
 from src.interface.utils import *
 from src.scripts import functions_mapping
 VERSION = "5.0"
@@ -29,7 +30,20 @@ root.geometry("550x500")
 ctk.set_appearance_mode("dark")
 root.title("KNX Cleaner & Updater V5")
 root.resizable(False, False)
-root.iconbitmap("icon.ico")
+
+# Nastavenie ikony s oneskorením a ošetrením chyby
+def set_icon():
+    try:
+        icon_path = os.path.abspath("icon.ico")
+        if os.path.exists(icon_path):
+            root.iconbitmap(icon_path)
+    except Exception as e:
+        print(f"Varovanie: Nepodarilo sa nastaviť ikonu: {e}")
+        # Aplikácia bude pokračovať s predvolenou ikonou
+
+# Nastavenie ikony po spustení hlavného okna
+root.after(500, set_icon)
+
 font = ctk.CTkFont(family='Centaur', size=18)
 label = ctk.CTkLabel(root, text=f"Hello, {username}! {time_difference_text}. Version {VERSION}", font=font)
 label.pack()
