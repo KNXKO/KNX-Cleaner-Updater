@@ -16,6 +16,7 @@ def _ensure_admin():
 _ensure_admin()
 
 from src.interface.utils import *
+from src.interface.todo import load_todos, save_todos
 from src.scripts import functions_mapping
 VERSION = "5.0"
 
@@ -44,17 +45,14 @@ ctk.set_appearance_mode("dark")
 root.title("KNX Cleaner & Updater V5")
 root.resizable(False, False)
 
-# Nastavenie ikony s oneskorením a ošetrením chyby
 def set_icon():
     try:
         icon_path = os.path.abspath("icon.ico")
         if os.path.exists(icon_path):
             root.iconbitmap(icon_path)
     except Exception as e:
-        print(f"Varovanie: Nepodarilo sa nastaviť ikonu: {e}")
-        # Aplikácia bude pokračovať s predvolenou ikonou
+        print(f"Warning: Could not set icon: {e}")
 
-# Nastavenie ikony po spustení hlavného okna
 root.after(500, set_icon)
 
 font = ctk.CTkFont(family='Centaur', size=18)
@@ -90,9 +88,8 @@ def run_all_functions():
 def run_selected_functions():
     selected_functions = [func_name for func_name, checkbox_var in checkboxes.items() if checkbox_var.get()]
     if not selected_functions:
-        print("⚠️ No functions selected.")
+        print("No functions selected.")
         return
-    # Clear checkboxes after execution
     for checkbox_var in checkboxes.values():
         if checkbox_var.get():
             checkbox_var.set(False)
@@ -100,26 +97,35 @@ def run_selected_functions():
 
 def stop_all_functions():
     stop_event.set()
-    print("⚠️ All functions stopped.")
+    print("All functions stopped.")
 
 # ******************** GUI ********************
+# Scrollbar must be packed before canvas so tkinter respects its RIGHT slot
+scrollbar = ctk.CTkScrollbar(root)
+scrollbar.pack(side=ctk.RIGHT, fill=ctk.Y)
+
 canvas = ctk.CTkCanvas(root, width=250, height=400, highlightthickness=0, bg=bg_color)
 canvas.pack(side=ctk.LEFT, fill=ctk.BOTH, expand=True)
 
 right_frame = ctk.CTkCanvas(canvas, highlightthickness=0, bg=bg_color)
 
 # ******************** SCROLLBAR ********************
-scrollbar = ctk.CTkScrollbar(root, command=canvas.yview)
-scrollbar.pack(side=ctk.RIGHT, fill=ctk.Y)
 canvas.configure(yscrollcommand=scrollbar.set)
+scrollbar.configure(command=canvas.yview)
 canvas.create_window((0, 0), window=right_frame, anchor=ctk.NW)
 
-# Function to scroll the canvas with the mouse wheel
 def on_canvas_mouse_wheel(event):
     canvas.yview_scroll(-1*(event.delta//120), "units")
 canvas.bind_all("<MouseWheel>", on_canvas_mouse_wheel)
 
-# ******************** CHECKBOXES ********************
+def _refresh_scroll():
+    right_frame.update_idletasks()
+    canvas.configure(scrollregion=canvas.bbox("all"))
+
+# ******************** MAIN SECTION ********************
+section_main = ctk.CTkLabel(right_frame, text="— Main —", font=font, text_color=accent_color)
+section_main.pack(side=ctk.TOP, fill=ctk.X, padx=5, pady=(5, 2))
+
 checkboxes = {}
 for function_name, func in functions_mapping.items():
     checkbox_var = ctk.BooleanVar(value=False)
@@ -131,9 +137,123 @@ for function_name, func in functions_mapping.items():
     checkbox = ctk.CTkCheckBox(button_frame, text=function_name, variable=checkbox_var, onvalue=True, font=font, offvalue=False, border_width=1, checkbox_width=18, checkbox_height=18, hover_color=accent_color, fg_color=accent_color)
     checkbox.pack(side=ctk.LEFT, padx=5)
 
-# Update the canvas scroll region after adding widgets
-right_frame.update_idletasks()
-canvas.configure(scrollregion=canvas.bbox("all"))
+# ******************** TODO SECTION ********************
+todo_container = None
+
+def build_todo_section():
+    global todo_container
+    if todo_container is not None:
+        todo_container.destroy()
+
+    todo_container = ctk.CTkFrame(right_frame, fg_color=bg_color)
+    todo_container.pack(side=ctk.TOP, fill=ctk.X, pady=(6, 0))
+
+    section_todo = ctk.CTkLabel(todo_container, text="— Todo —", font=font, text_color=accent_color)
+    section_todo.pack(fill=ctk.X, padx=5, pady=(4, 2))
+
+    # Add row
+    add_frame = ctk.CTkFrame(todo_container, fg_color=bg_color)
+    add_frame.pack(fill=ctk.X, pady=3, padx=2)
+
+    entry_var = ctk.StringVar()
+    entry = ctk.CTkEntry(
+        add_frame, textvariable=entry_var, placeholder_text="Add task...",
+        font=font, fg_color=button_color, border_width=1,
+        border_color=accent_color
+    )
+    entry.pack(side=ctk.LEFT, fill=ctk.X, expand=True, padx=(4, 2))
+
+    def add_task(event=None):
+        text = entry_var.get().strip()
+        if not text:
+            return
+        todos = load_todos()
+        todos.append({"text": text, "done": False})
+        save_todos(todos)
+        build_todo_section()
+        _refresh_scroll()
+
+    entry.bind("<Return>", add_task)
+
+    add_btn = ctk.CTkButton(
+        add_frame, text="+", width=36, command=add_task,
+        fg_color=accent_color, hover_color=button_color_hover, font=font
+    )
+    add_btn.pack(side=ctk.LEFT, padx=(0, 4))
+
+    todos = load_todos()
+    active = [(i, t) for i, t in enumerate(todos) if not t["done"]]
+    done_items = [(i, t) for i, t in enumerate(todos) if t["done"]]
+
+    # Active items
+    for i, todo in active:
+        item_frame = ctk.CTkFrame(todo_container, fg_color=bg_color)
+        item_frame.pack(fill=ctk.X, pady=2, padx=2)
+
+        var = ctk.BooleanVar(value=False)
+
+        def make_check(idx):
+            def on_check():
+                t = load_todos()
+                t[idx]["done"] = True
+                save_todos(t)
+                build_todo_section()
+                _refresh_scroll()
+            return on_check
+
+        cb = ctk.CTkCheckBox(
+            item_frame, text=todo["text"], variable=var, command=make_check(i),
+            font=font, hover_color=accent_color, fg_color=accent_color,
+            border_width=1, checkbox_width=18, checkbox_height=18
+        )
+        cb.pack(side=ctk.LEFT, padx=5)
+
+    # Done items
+    if done_items:
+        done_label = ctk.CTkLabel(todo_container, text="── Done ──", font=font, text_color=text_color)
+        done_label.pack(anchor=ctk.W, padx=5, pady=(6, 0))
+
+        for i, todo in done_items:
+            item_frame = ctk.CTkFrame(todo_container, fg_color=bg_color)
+            item_frame.pack(fill=ctk.X, pady=2, padx=2)
+
+            var = ctk.BooleanVar(value=True)
+
+            def make_uncheck(idx):
+                def on_uncheck():
+                    t = load_todos()
+                    t[idx]["done"] = False
+                    save_todos(t)
+                    build_todo_section()
+                    _refresh_scroll()
+                return on_uncheck
+
+            cb = ctk.CTkCheckBox(
+                item_frame, text=todo["text"], variable=var, command=make_uncheck(i),
+                font=font, hover_color=accent_color, fg_color=accent_color,
+                border_width=1, checkbox_width=18, checkbox_height=18,
+                text_color=text_color
+            )
+            cb.pack(side=ctk.LEFT, padx=5)
+
+            def make_delete(idx):
+                def on_delete():
+                    t = load_todos()
+                    t.pop(idx)
+                    save_todos(t)
+                    build_todo_section()
+                    _refresh_scroll()
+                return on_delete
+
+            del_btn = ctk.CTkButton(
+                item_frame, text="✕", width=30, command=make_delete(i),
+                fg_color=red_color, hover_color=red_color_hover, font=font
+            )
+            del_btn.pack(side=ctk.RIGHT, padx=5)
+
+build_todo_section()
+_refresh_scroll()
+root.after(200, _refresh_scroll)
 
 # ******************** BUTTONS ********************
 btn_runAll = ctk.CTkButton(root, text="Run All", command=run_all_functions, fg_color=accent_color, hover_color=button_color_hover, font=font)
