@@ -122,7 +122,7 @@ def learix_fps():
 
 def flush_dns():
     try:
-        result = subprocess.run("cmd /c ipconfig /flushdns", shell=True, check=True)
+        subprocess.run("cmd /c ipconfig /flushdns", shell=True, check=True)
         print("DNS cache successfully flushed.")
         return True
     except subprocess.CalledProcessError:

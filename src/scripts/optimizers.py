@@ -1,6 +1,8 @@
 import os
 import pygetwindow as gw
 import subprocess
+import pyautogui
+import time
 
 bcdedit_path = r'src\shortcuts\Bcdedit Optimizer.cmd'
 win_optimize_path = r'src\shortcuts\Windows Optimization.bat'
@@ -17,11 +19,27 @@ def run_win_optimize():
 
 def run_sfc():
     try:
-        subprocess.run(['runas', '/user:Administrator', 'sfc', '/scannow'],
-                      capture_output=True,
-                      text=True)
-        print("SFC scan initiated. Please wait...")
-        return True
+        print("Running SFC scan... (this may take several minutes)")
+        process = subprocess.Popen(
+            ['sfc', '/scannow'],
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+            text=True,
+            encoding='cp850',
+            errors='replace'
+        )
+        for line in process.stdout:
+            print(line, end='')
+        process.wait()
+        codes = {
+            0: "No integrity violations found.",
+            2: "Corrupted files found and repaired.",
+            3: "Corrupted files found, some could not be repaired.",
+            4: "Scan could not be performed or was interrupted."
+        }
+        print(f"SFC: {codes.get(process.returncode, f'Finished with code {process.returncode}')}")
+        print("Full log: C:\\Windows\\Logs\\CBS\\CBS.log")
+        return process.returncode in (0, 2)
     except Exception as e:
         print(f"Error running SFC scan: {e}")
         return False
@@ -44,13 +62,3 @@ def close_apps():
     except Exception as e:
         print(f"An error occurred while closing Spotify: {e}")
         return False
-
-    '''
-    try:
-        subprocess.Popen('taskkill /F /IM thorium.exe', shell=True)  # Ukážeme príklad pre Chrome, ale môžete zmeniť na svoj prehliadač
-        print("Browser successfully closed.")
-        return True
-    except Exception as e:
-        print(f"An error occurred while closing the browser: {e}")
-        return False
-    '''

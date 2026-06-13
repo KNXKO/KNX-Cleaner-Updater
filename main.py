@@ -2,6 +2,19 @@ import customtkinter as ctk
 import getpass
 import threading
 import os
+import ctypes
+import sys
+
+def _ensure_admin():
+    try:
+        if not ctypes.windll.shell32.IsUserAnAdmin():
+            ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, " ".join(sys.argv), None, 1)
+            sys.exit()
+    except Exception:
+        pass
+
+_ensure_admin()
+
 from src.interface.utils import *
 from src.scripts import functions_mapping
 VERSION = "5.0"
@@ -58,14 +71,13 @@ def run_functions(functions_to_run):
         func = functions_mapping.get(func_name)
         if func:
             try:
-                output_text.insert(ctk.END, f"Running {func_name}...\n")
+                print(f"Running {func_name}...")
                 func_result = func()
                 results[func_name] = func_result
             except Exception as e:
                 results[func_name] = str(e)
-    output_text.insert(ctk.END, "====================\n")
-    output_text.see(ctk.END)
-    result_message(results)
+    print("====================")
+    root.after(0, result_message, results)
 
 def threaded_function(func, *args):
     stop_event.clear()
