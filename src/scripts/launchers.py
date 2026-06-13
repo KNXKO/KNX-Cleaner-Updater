@@ -1,8 +1,8 @@
 import os
+import subprocess
 
 adobe_path = r'src\shortcuts\Adobe Creative Cloud.lnk'
 word_path = r'src\shortcuts\Word.lnk'
-signal_path = r'src\shortcuts\Signal.lnk'
 nvidia_path = r'src\shortcuts\NVIDIA.lnk'
 signalrgb_path = r'src\shortcuts\SignalRgb.lnk'
 ccleaner_path = r'src\shortcuts\CCleaner64.exe'
@@ -25,16 +25,6 @@ def open_word():
         return True
     except Exception as e:
         print(f"Error opening Microsoft Word: {e}")
-        return False
-
-def open_signal():
-    try:
-        print("Opening Signal...")
-        os.startfile(signal_path)
-        print("Signal successfully opened.")
-        return True
-    except Exception as e:
-        print(f"Error opening Signal: {e}")
         return False
 
 def open_nvidia():
@@ -70,7 +60,7 @@ def open_ccleaner():
 def open_win_update():
     try:
         print("Opening Windows Update...")
-        os.system("start ms-settings:windowsupdate")
+        subprocess.Popen(['cmd', '/c', 'start', 'ms-settings:windowsupdate'], shell=False)
         print("Windows Update successfully opened.")
         return True
     except Exception as e:
@@ -80,7 +70,7 @@ def open_win_update():
 def open_ms_update():
     try:
         print("Opening Microsoft Store...")
-        os.system("start ms-windows-store:home")
+        subprocess.Popen(['cmd', '/c', 'start', 'ms-windows-store:home'], shell=False)
         print("Microsoft Store successfully opened.")
         return True
     except Exception as e:

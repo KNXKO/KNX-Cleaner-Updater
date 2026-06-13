@@ -1,6 +1,7 @@
 import os
 import subprocess
 import time
+import shutil
 import pyautogui
 import pygetwindow as gw
 
@@ -122,9 +123,63 @@ def learix_fps():
 
 def flush_dns():
     try:
-        result = subprocess.run("cmd /c ipconfig /flushdns", shell=True, check=True)
+        subprocess.run("cmd /c ipconfig /flushdns", shell=True, check=True)
         print("DNS cache successfully flushed.")
         return True
     except subprocess.CalledProcessError:
         print("Failed to flush the DNS cache.")
+        return False
+
+def clear_update_cache():
+    cache_path = r'C:\Windows\SoftwareDistribution\Download'
+    try:
+        subprocess.run(['net', 'stop', 'wuauserv'], capture_output=True)
+        subprocess.run(['net', 'stop', 'bits'], capture_output=True)
+        print("Windows Update service stopped.")
+
+        removed = 0
+        for item in os.listdir(cache_path):
+            item_path = os.path.join(cache_path, item)
+            try:
+                if os.path.isfile(item_path):
+                    os.remove(item_path)
+                elif os.path.isdir(item_path):
+                    shutil.rmtree(item_path)
+                removed += 1
+            except Exception as e:
+                print(f"Could not remove {item}: {e}")
+
+        subprocess.run(['net', 'start', 'wuauserv'], capture_output=True)
+        subprocess.run(['net', 'start', 'bits'], capture_output=True)
+        print(f"Windows Update cache cleared ({removed} items removed).")
+        return True
+    except Exception as e:
+        print(f"Error clearing Windows Update cache: {e}")
+        return False
+
+def empty_recycle_bin():
+    try:
+        subprocess.run(
+            ['powershell', '-Command', 'Clear-RecycleBin -Force -ErrorAction SilentlyContinue'],
+            check=True
+        )
+        print("Recycle Bin successfully emptied.")
+        return True
+    except Exception as e:
+        print(f"Error emptying Recycle Bin: {e}")
+        return False
+
+def clear_event_logs():
+    try:
+        logs = ['Application', 'System', 'Security']
+        for log in logs:
+            result = subprocess.run(['wevtutil', 'cl', log], capture_output=True, text=True)
+            if result.returncode == 0:
+                print(f"Cleared event log: {log}")
+            else:
+                print(f"Could not clear {log} (may need admin): {result.stderr.strip()}")
+        print("Event logs cleared.")
+        return True
+    except Exception as e:
+        print(f"Error clearing event logs: {e}")
         return False

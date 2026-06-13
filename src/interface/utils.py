@@ -68,7 +68,7 @@ def calculate_time_difference(last_run_datetime):
             days = time_difference.days
             return f"Last seen {days} days ago"
     else:
-        return None
+        return "First run"
 
 # ******************** ALERT ********************
 def result_message(results):
@@ -83,18 +83,18 @@ def result_message(results):
     alert_window("Function Execution Results", message.strip())
 
 def alert_window(title, message):
-    alert_window = ctk.CTkToplevel()
-    alert_window.title("Results")
-    alert_window.resizable(False, False)
-    alert_window.attributes('-topmost', True)
+    window = ctk.CTkToplevel()
+    window.title("Results")
+    window.resizable(False, False)
+    window.attributes('-topmost', True)
     font = ctk.CTkFont(family='Centaur', size=18)
-    alert_window.after(250, lambda: alert_window.iconbitmap("icon.ico"))
-    alert_window.grab_set()
+    window.after(250, lambda: window.iconbitmap("icon.ico"))
+    window.grab_set()
 
-    message_label = ctk.CTkLabel(alert_window, text=message, font=font, wraplength=300)
+    message_label = ctk.CTkLabel(window, text=message, font=font, wraplength=300)
     message_label.pack(pady=10, padx=30)
 
-    ok_button = ctk.CTkButton(alert_window, text="OK", command=alert_window.destroy, fg_color=button_color, hover_color=button_color_hover, font=font)
+    ok_button = ctk.CTkButton(window, text="OK", command=window.destroy, fg_color=button_color, hover_color=button_color_hover, font=font)
     ok_button.pack(pady=10)
 
 # ******************** CONSOLE ********************
@@ -103,6 +103,9 @@ class StdoutRedirector:
         self.widget = widget
 
     def write(self, text):
+        self.widget.after(0, self._insert, text)
+
+    def _insert(self, text):
         self.widget.insert(ctk.END, text)
         self.widget.see(ctk.END)
 

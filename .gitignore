@@ -3,6 +3,8 @@ src/shortcuts/__pycache__/
 src/scripts/__pycache__/
 TODO.txt
 __pycache__/
+CLAUDE.md
+.venv/
 LOG
 DATA
 Setup
