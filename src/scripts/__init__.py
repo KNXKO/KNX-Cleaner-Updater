@@ -6,7 +6,10 @@ from .cleaners import (
     defrag_disk,
     disk_cleanup,
     learix_fps,
-    flush_dns
+    flush_dns,
+    empty_recycle_bin,
+    clear_event_logs,
+    clear_update_cache
 )
 
 # Importy z launchers.py
@@ -31,7 +34,11 @@ from .optimizers import (
     run_win_optimize,
     run_sfc,
     run_bcdedit,
-    close_apps
+    close_apps,
+    set_high_performance,
+    run_dism,
+    reset_network,
+    optimize_drives
 )
 
 functions_mapping = {
@@ -42,7 +49,14 @@ functions_mapping = {
     "Clean Log Files": run_logfiles,
     "Windows Optimize": run_win_optimize,
     "Flush DNS Cache": flush_dns,
+    "Empty Recycle Bin": empty_recycle_bin,
+    "Clear Event Logs": clear_event_logs,
+    "Clear Windows Update Cache": clear_update_cache,
+    "Reset Network Stack": reset_network,
+    "Optimize Drives (SSD Trim)": optimize_drives,
     "Run SFC Scan": run_sfc,
+    "Run DISM RestoreHealth": run_dism,
+    "Set High Performance Plan": set_high_performance,
     "Run Winget Update": run_winget,
     "Clean Prefetch": clean_prefetch,
     "Open Disk Defragmentation": defrag_disk,
