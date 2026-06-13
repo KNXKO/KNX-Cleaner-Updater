@@ -1,50 +1,89 @@
-# KNX Cleaner & Updater 🧹🔄
+# KNX Cleaner & Updater
 
-KNX Cleaner & Updater is a Python application designed to automate various system maintenance tasks on Windows systems. It provides a user-friendly interface for running common maintenance functions such as disk cleanup, defragmentation, software updates, and more.
+KNX Cleaner & Updater is a Windows desktop utility that automates system maintenance — cleanup, optimization, and app management — through a clean CustomTkinter GUI.
 
-![Screenshot of KNX Cleaner & Updater](docs/KNX_CleanerUpdaterV5.png)
+## Features
 
-## Features ✨
+- **Tab navigation** — Main tab for system functions, Todo tab for personal task tracking
+- **Todo panel** — Add tasks, check off to move to Done, delete completed items (persisted to `logs/todo.json`)
+- **Run All / Run Selected / Stop All** — full control over which functions execute
+- **Real-time console output** — streaming stdout from every function into the in-app console
+- **Last run timestamp** — greeting shows how long since the last maintenance run
 
-- **User-friendly Interface:** The application provides an intuitive graphical user interface (GUI) for easy navigation and operation.
-- **Multiple Maintenance Functions:** Offers a range of system maintenance functions, including disk cleanup, prefetch management, Windows updates, application optimizations, and more.
-- **Run All or Individual Functions:** Users can choose to run all available functions simultaneously or select specific functions to execute.
-- **Output Logging:** Displays real-time output messages from each function execution in the application's output window.
-- **Stop All Functions:** Provides an option to stop all running functions with a single click, ensuring control and flexibility during maintenance tasks.
-- **Alert Window:** Includes an alert window feature to notify users of important events or errors during function execution.
+## Functions
 
-## Latest Version 📅
+### Cleanup
+| Function | Description |
+|---|---|
+| Clean Temp | Runs temp cleanup batch script |
+| Clean Prefetch | Clears `C:\Windows\Prefetch` |
+| Clean Log Files | Runs log folder cleaner script |
+| Empty Recycle Bin | Empties recycle bin via PowerShell |
+| Clear Event Logs | Clears Application, System, Security event logs |
+| Clear Windows Update Cache | Stops WU service, clears `SoftwareDistribution\Download`, restarts service |
+| Flush DNS Cache | `ipconfig /flushdns` |
+| Open Disk Cleanup | Opens `cleanmgr.exe` |
+| Open Disk Defragmentation | Opens `dfrgui.exe` |
 
-- Version 5.0 (Released on August 3, 2024)
+### Optimization
+| Function | Description |
+|---|---|
+| Set High Performance Plan | Switches power plan to High Performance |
+| Reset Network Stack | Winsock reset + IP stack reset + release/renew/flushdns |
+| Optimize Drives (SSD Trim) | `defrag /C /L` — retrim on all SSD drives |
+| Windows Optimize | Runs Windows Optimization batch script |
+| Bcdedit Optimizer | Runs Bcdedit optimization script |
+| Run SFC Scan | `sfc /scannow` with streamed output |
+| Run DISM RestoreHealth | `DISM /Online /Cleanup-Image /RestoreHealth` with streamed output |
+| Close Apps (Spotify) | Force-kills Spotify |
 
-## Installation 🚀
+### Updates
+| Function | Description |
+|---|---|
+| Run Winget Update | Opens CMD and runs `winget upgrade --all` |
+| Open Windows Update | Opens `ms-settings:windowsupdate` |
+| Open MS Store | Opens Microsoft Store |
+| Open Web Browser with Links | Opens ASUS + AMD driver download pages |
 
-1. Clone this repository to your local machine.
-2. Install Python 3 if you haven't already.
-3. Install the required dependencies by running `pip install -r requirements.txt`.
-4. Run the application by executing `python main.py`.
+### Launchers
+| Function | Description |
+|---|---|
+| Run Learix FPS | Runs Learix FPS optimization script |
+| Open Adobe Creative Cloud | Opens Adobe CC |
+| Open Word | Opens Microsoft Word |
+| Open Nvidia App | Opens NVIDIA App |
+| Open SignalRGB | Opens SignalRGB |
+| Open CCleaner | Opens CCleaner |
 
-## Usage 🛠️
+## Installation
 
-- Run Individual Functions: Click on the checkboxes next to each function and use the corresponding button to execute them.
-- Run All Functions: Click "Run All" to execute all functions sequentially.
-- Run Selected Functions: Check the boxes for the functions you want to run and click "Run Selected."
-- Stop All Functions: Click "Stop All" to halt all currently running functions.
-- View Logs: The application will log progress and errors in the output text area for real-time feedback.
+1. Clone this repository
+2. Install Python 3.10+
+3. Install dependencies: `pip install -r requirements.txt`
+4. Run: `python main.py`
 
-## Dependencies 📦
+> **Note:** The app must be run as Administrator. It will prompt for elevation automatically on launch.
 
-- Python 3.x
-- `customtkinter`
-- `pygetwindow`
-- `ctypes`
-- `os`
-- Additional dependencies listed in `requirements.txt`
+## Usage
 
-## Contributing 🤝
+- **Run All** — executes all functions sequentially
+- **Run Selected** — check boxes next to desired functions, then click Run Selected
+- **Stop All** — sets a stop event; functions that check it will halt
+- **Todo tab** — manage a personal task list alongside your maintenance routine
 
-Contributions are welcome! If you have ideas for new features, improvements, or bug fixes, please open an issue or submit a pull request. Your feedback and contributions help improve the project.
+## Requirements
 
-## License 📄
+- Windows 10/11
+- Python 3.10+
+- `customtkinter`, `pygetwindow`, `pyautogui` (see `requirements.txt`)
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## Version History
+
+| Version | Date | Highlights |
+|---|---|---|
+| 6.0 | June 2026 | Todo panel, tab navigation, 7 new system functions, UI fixes |
+| 5.0 | August 2024 | GUI overhaul, CustomTkinter, background threading |
+
+## License
+
+MIT License
